@@ -79,7 +79,7 @@ export default function Navigation() {
 
   return (
     <>
-      <Navbar bg="light" expand="md" sticky="top">
+      <Navbar className={styles.navBar} bg="light" expand="md" sticky="top">
         <Container>
           <Navbar.Brand href="#home" className={styles.logo}>
             <img
@@ -87,6 +87,7 @@ export default function Navigation() {
               alt="logo"
               height={50}
             />
+            <Navbar.Brand className={styles.logoBackground} />
           </Navbar.Brand>
           <Navbar.Brand className={styles.brandName}>
             Hustling Insights

@@ -1,13 +1,5 @@
 @use "../../styles/config.scss" as config;
 
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
-  padding: 25px;
-}
-
 .icon {
   cursor: pointer;
   background-color: config.$color-black;

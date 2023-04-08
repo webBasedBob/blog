@@ -6,9 +6,11 @@ import Row from "react-bootstrap/Row";
 const SuggestedArticle = ({ image, title, text }) => {
   return (
     <Card className={styles.card}>
-      <Card.Img src={image} className={styles.image} />
-      <Card.Body>
-        <Card.Title>{title}</Card.Title>
+      <div className={styles.image}>
+        <Card.Img src={image} />
+      </div>
+      <Card.Body className={styles.body}>
+        <Card.Title className={styles.title}>{title}</Card.Title>
         <Card.Text>{text}</Card.Text>
       </Card.Body>
     </Card>

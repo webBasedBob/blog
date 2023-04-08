@@ -1,3 +1,11 @@
+@use "../../../styles/config.scss" as config;
+@use "../../../styles/animations.scss" as animation;
+
+.navBar {
+  background-color: config.$color-black !important;
+  color: config.$color-white !important;
+}
+
 .accordion {
   width: 100%;
   // display: flex;
@@ -9,8 +17,9 @@
   }
   & * {
     border: none;
-    background-color: transparent !important;
-    color: black;
+    background-color: config.$color-black;
+
+    color: config.$color-white;
   }
   & button::after {
     display: none;
@@ -19,6 +28,7 @@
 .itensWrapper {
   display: flex;
 }
+
 .logo {
   height: 80px;
   width: 80px;
@@ -30,14 +40,31 @@
   transform: translate(50%, 50%);
   border-radius: 50%;
   overflow: hidden;
-  background-color: orangered;
+  background-color: transparent;
+  // @include config.gradientBottomLeft;
   padding: 5px;
+  transition: all 0.1s;
   & img {
     height: 100%;
     width: 100%;
     border-radius: 50%;
+    position: relative;
+    z-index: 10;
   }
 }
+
+.logoBackground {
+  border-radius: 50%;
+  @include config.gradientBottomLeft;
+  transition: all 0.5s;
+  height: 105%;
+  width: 105%;
+  position: absolute;
+  bottom: -2%;
+  right: -22%;
+  @include animation.endless-spin;
+}
+
 .button {
   margin: 14px;
 }

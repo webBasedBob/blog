@@ -11,8 +11,8 @@ export default function Hero({ title, intro }) {
       <Row>
         <Col>
           <Header>{title}</Header>
-          <Intro>{intro}</Intro>
-          {/* <SharePanel /> */}
+          {/* <Intro>{intro}</Intro> */}
+          <SharePanel />
         </Col>
       </Row>
       <Row>

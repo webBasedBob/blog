@@ -1,0 +1,146 @@
+$color-black: #070708;
+$color-white: #fff;
+$color-gold: #ffd700;
+$color-blue: #0079ff;
+$color-red: #ff0051;
+
+@mixin gradientBottomRight {
+  background-image: linear-gradient(
+    to right top,
+    #ffd700,
+    #ffa535,
+    #ff716f,
+    #ff52ab,
+    #e45de0,
+    #ce5de4,
+    #b75ee6,
+    #9d5fe8,
+    #cd44cb,
+    #ec1ea5,
+    #fc007c,
+    #ff0051
+  );
+}
+
+@mixin gradientTopRight {
+  background-image: linear-gradient(
+    to right bottom,
+    #ffd700,
+    #ffa535,
+    #ff716f,
+    #ff52ab,
+    #e45de0,
+    #ce5de4,
+    #b75ee6,
+    #9d5fe8,
+    #cd44cb,
+    #ec1ea5,
+    #fc007c,
+    #ff0051
+  );
+}
+@mixin gradientLeftRight {
+  background-image: linear-gradient(
+    to right,
+    #ffd700,
+    #ffa535,
+    #ff716f,
+    #ff52ab,
+    #e45de0,
+    #ce5de4,
+    #b75ee6,
+    #9d5fe8,
+    #cd44cb,
+    #ec1ea5,
+    #fc007c,
+    #ff0051
+  );
+}
+
+@mixin gradientTopBottom {
+  background-image: linear-gradient(
+    to bottom,
+    #ffd700,
+    #ffa535,
+    #ff716f,
+    #ff52ab,
+    #e45de0,
+    #ce5de4,
+    #b75ee6,
+    #9d5fe8,
+    #cd44cb,
+    #ec1ea5,
+    #fc007c,
+    #ff0051
+  );
+}
+
+@mixin gradientRightLeft {
+  background-image: linear-gradient(
+    to left,
+    #ffd700,
+    #ffa535,
+    #ff716f,
+    #ff52ab,
+    #e45de0,
+    #ce5de4,
+    #b75ee6,
+    #9d5fe8,
+    #cd44cb,
+    #ec1ea5,
+    #fc007c,
+    #ff0051
+  );
+}
+@mixin gradientBottomLeft {
+  background-image: linear-gradient(
+    to left top,
+    #ffd700,
+    #ffa535,
+    #ff716f,
+    #ff52ab,
+    #e45de0,
+    #ce5de4,
+    #b75ee6,
+    #9d5fe8,
+    #cd44cb,
+    #ec1ea5,
+    #fc007c,
+    #ff0051
+  );
+}
+@mixin gradientBottomTop {
+  background-image: linear-gradient(
+    to top,
+    #ffd700,
+    #ffa535,
+    #ff716f,
+    #ff52ab,
+    #e45de0,
+    #ce5de4,
+    #b75ee6,
+    #9d5fe8,
+    #cd44cb,
+    #ec1ea5,
+    #fc007c,
+    #ff0051
+  );
+}
+
+@mixin gradientRadial {
+  background-image: radial-gradient(
+    circle,
+    #ffd700,
+    #ffa535,
+    #ff716f,
+    #ff52ab,
+    #e45de0,
+    #ce5de4,
+    #b75ee6,
+    #9d5fe8,
+    #cd44cb,
+    #ec1ea5,
+    #fc007c,
+    #ff0051
+  );
+}

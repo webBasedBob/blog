@@ -1,0 +1,35 @@
+@use "../../styles/config.scss" as config;
+
+.container {
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  background-color: config.$color-black;
+  height: 90vh;
+  color: config.$color-white;
+  position: relative;
+}
+
+.imagesContainer {
+  z-index: -1;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  & img {
+    height: 100%;
+    width: 100%;
+    opacity: 0.05;
+    object-fit: cover;
+  }
+}
+.heroTitle {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  letter-spacing: 1rem;
+  transform: translate(-50%);
+  padding-left: 30px;
+  padding-right: 30px;
+  width: fit-content;
+  white-space: nowrap;
+}
