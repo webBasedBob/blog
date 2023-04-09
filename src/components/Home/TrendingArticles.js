@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./TrendingArticles.module.scss";
 import Carousel from "react-bootstrap/Carousel";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 const TrendingArticles = () => {
   const [index, setIndex] = useState(0);
@@ -54,7 +54,7 @@ const TrendingArticles = () => {
   ];
 
   return (
-    <Container>
+    <Container fluid className={styles.container}>
       <Carousel
         className={styles.carousel}
         activeIndex={index}
@@ -69,6 +69,9 @@ const TrendingArticles = () => {
               <div className={styles.text}>
                 <h3 className={styles.title}>{article.title}</h3>
                 <p className={styles.description}>{article.description}</p>
+                <Button className={styles.button} variant="link">
+                  Go to article &#8594;{" "}
+                </Button>
               </div>
             </Carousel.Item>
           );

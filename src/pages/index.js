@@ -14,8 +14,8 @@ export default function Home() {
     <>
       <Navigation />
       <Hero />
-      <TrendingArticles />
       <OurPicks />
+      <TrendingArticles />
     </>
   );
 }

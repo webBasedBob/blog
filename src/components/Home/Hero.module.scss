@@ -33,3 +33,10 @@
   width: fit-content;
   white-space: nowrap;
 }
+@media (max-width: 750px) {
+  .heroTitle {
+    font-size: 30px;
+    white-space: normal;
+  }
+}
+// @media()

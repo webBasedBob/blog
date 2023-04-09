@@ -15,7 +15,8 @@
   transform: translate(-50%);
   letter-spacing: 3px;
   font-size: 24px;
-  width: 50rem;
+  max-width: 50rem;
+  width: 90%;
 }
 .carouselTitle {
   letter-spacing: 5px;
@@ -35,4 +36,31 @@
   width: 100%;
 }
 .carousel-inner {
+}
+@media (max-width: 750px) {
+  .cariuselText {
+    // width: 100%;
+    font-size: 20px;
+  }
+  .carouselTitle {
+    font-size: 24px;
+  }
+}
+@media (max-width: 550px) {
+  .cariuselText {
+    // width: 100%;
+    font-size: 18px;
+  }
+  .carouselTitle {
+    font-size: 20px;
+  }
+}
+@media (max-width: 400px) {
+  .cariuselText {
+    // width: 100%;
+    font-size: 16px;
+  }
+  .carouselTitle {
+    font-size: 18px;
+  }
 }

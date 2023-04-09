@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import SuggestedArticles from "@/components/SuggestedArticles/SuggestedArticles";
 import styles from "./index.module.scss";
 import Head from "next/head";
+import PageWrapper from "@/components/UI/PageWrapper";
 export default function Home() {
   let articles = [
     {
@@ -123,14 +124,14 @@ export default function Home() {
         />
       </Head>
       <Navigation />
-      <Container className={styles.wrapper}>
+      <PageWrapper>
         <Row>
           <Article article={article} />
         </Row>
         <Row>
           <SuggestedArticles articles={articles}></SuggestedArticles>
         </Row>
-      </Container>
+      </PageWrapper>
     </>
   );
 }

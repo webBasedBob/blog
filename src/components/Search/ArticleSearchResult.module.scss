@@ -1,16 +1,21 @@
 @use "../../styles/config.scss" as config;
-
+$card-width: 235px;
 .card {
-  flex-direction: row;
+  // flex-direction: row;
   // justify-content: space-between;
   // padding: 20px;
-  margin: 10px 0;
+  // margin: 1rem;
+  // gap
+  // box-sizing: border-box !important;
+  // padding: 1rem;
+  // margin: 1rem;
+  // gap: 1rem;
   cursor: pointer;
   border: none;
-  border-radius: 20px;
-  padding: 1rem;
+  // width: $card-width;
+  margin: 1rem;
+  // background-color: config.$color-light-gray;
   &:hover {
-    background-color: config.$color-light-gray;
     .image {
       backface-visibility: hidden;
       & img {
@@ -20,11 +25,14 @@
     }
   }
 }
+.row {
+  gap: 1rem;
+}
 .image {
-  height: 120px;
-  width: 120px;
+  height: 175px;
+  // width: $card-width;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 20px;
   & img {
     height: 100%;
     width: 100%;
@@ -33,19 +41,24 @@
   }
 }
 .body {
-  padding: 20px 30px;
+  // padding: 5px 30px;
+  padding: 0;
+  margin: 0;
+
+  padding-top: 1rem;
 }
 .title {
   text-transform: capitalize;
   font-size: 20px;
   font-weight: 800;
+  padding: 0;
+  margin: 0;
   &:hover {
     text-decoration: underline;
   }
 }
+.date {
+  // text-align: end;
+}
 @media (max-width: 550px) {
-  .image {
-    height: 100px;
-    width: 100px;
-  }
 }
