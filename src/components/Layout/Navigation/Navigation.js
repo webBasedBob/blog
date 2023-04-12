@@ -12,6 +12,11 @@ import Icon from "@/components/UI/Icon";
 import { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
+import Link from "next/link";
+import { InputText } from "primereact/inputtext";
+import { Divider } from "primereact/divider";
+import { Accordion as Accordion2 } from "primereact/accordion";
+import { AccordionTab as AccordionTab2 } from "primereact/accordion";
 export default function Navigation() {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
@@ -19,15 +24,56 @@ export default function Navigation() {
   const handleShowOffcanvas = () => setShowOffcanvas(true);
 
   const navItemsData = [
-    { title: "home", expandedComponent: <p>home</p> },
-    { title: "articles", expandedComponent: <p>articles</p> },
-    { title: "about", expandedComponent: <p>about</p> },
-    { title: "contact", expandedComponent: <p>contact</p> },
+    { title: "home", expandedComponent: <p>home</p>, href: "/" },
+    {
+      title: "articles",
+      expandedComponent: (
+        <div className={styles.articlesLinksWrapper}>
+          <button className={styles.navItem} type="button">
+            {" "}
+            <Link className={styles.navLink} href="/articles#entrepreneur">
+              entrepreneur hustler
+            </Link>
+          </button>
+          {/* <Divider className={styles.divider} layout="vertical"></Divider> */}
+          <button className={styles.navItem} type="button">
+            {" "}
+            <Link className={styles.navLink} href="/articles#side">
+              side hustler
+            </Link>
+          </button>
+          {/* <Divider className={styles.divider} layout="vertical"></Divider> */}
+          <button className={styles.navItem} type="button">
+            {" "}
+            <Link className={styles.navLink} href="/articles#employed">
+              employed hustler
+            </Link>
+          </button>
+        </div>
+      ),
+      href: "",
+    },
+    { title: "about", expandedComponent: <p>about</p>, href: "/about" },
+    { title: "contact", expandedComponent: <p>contact</p>, href: "/contact" },
     {
       title: "search",
-      expandedComponent: <p>search bar</p>,
+      expandedComponent: (
+        <div className={styles.searchWrapper}>
+          <span className="p-input-icon-left">
+            <i className="pi pi-search" />
+            <InputText
+              className={styles.searchinput}
+              placeholder="Keywords here"
+            />
+          </span>
+          <Button className={styles.searchBtn} variant="light">
+            Search
+          </Button>
+        </div>
+      ),
       isIcon: true,
       icon: SearchIcon,
+      href: "",
     },
   ];
 
@@ -40,7 +86,9 @@ export default function Navigation() {
     const isMiddleItem = Math.floor(navItemsData.length / 2) === index;
     return (
       <CustomToggle
+        canOpenExtraNav={item.title === "articles" || item.title === "search"}
         eventKey="0"
+        href={item.href}
         key={item.title}
         id={item.title}
         className={`${styles.navItem} ${
@@ -57,7 +105,14 @@ export default function Navigation() {
     () => callback && callback(eventKey)
   );
 
-  function CustomToggle({ children, eventKey, id, className }) {
+  function CustomToggle({
+    children,
+    eventKey,
+    id,
+    className,
+    canOpenExtraNav,
+    href,
+  }) {
     const decoratedOnClick = useAccordionButton(eventKey, () => {
       const content = navItemsData.find((item) => {
         return item.title === id;
@@ -71,17 +126,57 @@ export default function Navigation() {
     });
 
     return (
-      <button className={className} type="button" onClick={decoratedOnClick}>
-        {children}
+      <button
+        className={className}
+        type="button"
+        onClick={canOpenExtraNav ? decoratedOnClick : () => {}}
+      >
+        {" "}
+        <Link className={styles.navLink} href={href}>
+          {children}
+        </Link>
       </button>
     );
   }
+
+  const offcanvasNavItemsJSX = navItemsData.map((item, index) => {
+    const canOpenExtraNav =
+      item.title === "articles" || item.title === "search";
+    if (canOpenExtraNav) {
+      return (
+        <Accordion.Item
+          key={item.title}
+          className={styles.offcanvasAccordionItem}
+          eventKey={index}
+        >
+          <Accordion.Header className={styles.offcanvasAccordionHeader}>
+            {item.isIcon ? <Icon>{item.icon}</Icon> : item.title}
+          </Accordion.Header>
+          <Accordion.Body className={styles.offcanvasAccordionBody}>
+            {item.expandedComponent}
+          </Accordion.Body>
+        </Accordion.Item>
+      );
+    } else {
+      return (
+        <Accordion.Item
+          className={styles.offcanvasAccordionItem}
+          key={item.title}
+          eventKey={index}
+        >
+          <Link className={styles.navLink} href={item.href}>
+            {item.isIcon ? <Icon>{item.icon}</Icon> : item.title}
+          </Link>
+        </Accordion.Item>
+      );
+    }
+  });
 
   return (
     <>
       <Navbar className={styles.navBar} bg="light" expand="md" sticky="top">
         <Container>
-          <Navbar.Brand href="#home" className={styles.logo}>
+          <Navbar.Brand href="/" className={styles.logo}>
             <img
               src="https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hustlinglogo.png?alt=media&token=b823bc15-10de-414c-84b2-57168d364daa"
               alt="logo"
@@ -111,13 +206,28 @@ export default function Navigation() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Offcanvas show={showOffcanvas} onHide={handleCloseOffcanvas}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+      <Offcanvas
+        className={styles.offcanvas}
+        show={showOffcanvas}
+        onHide={handleCloseOffcanvas}
+      >
+        <Offcanvas.Header closeButton closeVariant="white">
+          <Offcanvas.Title>
+            {" "}
+            <Navbar.Brand href="/" className={styles.logoOffcanvas}>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hustlinglogo.png?alt=media&token=b823bc15-10de-414c-84b2-57168d364daa"
+                alt="logo"
+                height={50}
+              />
+              <Navbar.Brand className={styles.logoBackgroundOffcanvas} />
+            </Navbar.Brand>
+          </Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+        <Offcanvas.Body className={styles.offcanvasContainer}>
+          <Accordion flush className={styles.offcanvasAccordion}>
+            {offcanvasNavItemsJSX}
+          </Accordion>
         </Offcanvas.Body>
       </Offcanvas>
     </>

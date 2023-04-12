@@ -39,7 +39,7 @@ const HeroCarousel = () => {
     >
       {data.map((pula) => {
         return (
-          <Carousel.Item className={styles.carouselItem}>
+          <Carousel.Item key={pula.title} className={styles.carouselItem}>
             <div className={styles.cariuselText}>{pula.text}</div>
             <h2 className={styles.carouselTitle}>{pula.title}</h2>
           </Carousel.Item>

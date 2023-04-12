@@ -3,87 +3,48 @@ import ArticleSearchResult from "../Search/ArticleSearchResult";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-let articles = [
-  {
-    date: "afla cum m-am cacat pe mine",
-    title:
-      "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
-  },
-  {
-    date: "afla cum m-am cacat pe mine",
-    title:
-      "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
-  },
-  {
-    date: "afla cum m-am cacat pe mine",
-    title:
-      "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
-  },
-  {
-    date: "afla cum m-am cacat pe mine",
-    title:
-      "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
-  },
-  {
-    date: "afla cum m-am cacat pe mine",
-    title:
-      "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
-  },
-  {
-    date: "afla cum m-am cacat pe mine",
-    title:
-      "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
-  },
-  {
-    date: "afla cum m-am cacat pe mine",
-    title:
-      "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
-  },
-  {
-    date: "afla cum m-am cacat pe mine",
-    title:
-      "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
-  },
-  {
-    date: "afla cum m-am cacat pe mine",
-    title:
-      "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
-  },
-];
+import { Carousel } from "primereact/carousel";
 import styles from "./OurPicks.module.scss";
 import PageWrapper from "../UI/PageWrapper";
-const OurPicks = () => {
+const OurPicks = ({ articleResultsSection, hasBackground }) => {
+  const responsiveOptions = [
+    { breakpoint: "600px", numScroll: 1, numVisible: 1 },
+    { breakpoint: "850px", numScroll: 1, numVisible: 2 },
+    { breakpoint: "1200px", numScroll: 1, numVisible: 3 },
+    { breakpoint: "5000px", numScroll: 1, numVisible: 4 },
+  ];
+  const wrapperClass = `${styles.wrapper} ${
+    hasBackground ? styles.background : ""
+  }`;
+  return (
+    <div className={wrapperClass}>
+      {/* <h2 className={styles.sectionTitle}>
+        Hot Articles - {articleResultsSection.title}
+      </h2> */}
+      <Carousel
+        // autoplayInterval={3000}
+        responsiveOptions={responsiveOptions}
+        circular
+        value={articleResultsSection.articles}
+        numScroll={1}
+        numVisible={3}
+        itemTemplate={ArticleSearchResult}
+        style={{
+          width: "100%",
+          maxWidth: 1200,
+          margin: "0 auto",
+        }}
+      />
+    </div>
+  );
   return (
     <Container className={styles.container} as="section">
-      {/* <h4 style={{ marginBottom: 44 }}>Suggested Articles</h4> */}
+      <h4 style={{ marginBottom: 44 }}>{articleResultsSection.title}</h4>
       <Row lg={4} md={3} sm={2} xs={1}>
-        {articles.map(({ title, image, date }) => {
+        {articleResultsSection.articles?.map(({ title, image, date }) => {
           return (
-            <div style={{ padding: "1rem 0" }}>
-              <ArticleSearchResult
-                key={title}
-                title={title}
-                date={date}
-                image={image}
-              />
+            <div key={title} className={styles.articleWrapper}>
+              <ArticleSearchResult title={title} date={date} image={image} />
             </div>
           );
         })}

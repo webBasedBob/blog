@@ -12,9 +12,10 @@ $card-width: 235px;
   // gap: 1rem;
   cursor: pointer;
   border: none;
-  // width: $card-width;
+  max-width: $card-width;
   margin: 1rem;
-  // background-color: config.$color-light-gray;
+  background-color: transparent;
+  margin: 0 auto;
   &:hover {
     .image {
       backface-visibility: hidden;
@@ -33,6 +34,7 @@ $card-width: 235px;
   // width: $card-width;
   overflow: hidden;
   border-radius: 20px;
+  position: relative;
   & img {
     height: 100%;
     width: 100%;
@@ -61,4 +63,18 @@ $card-width: 235px;
   // text-align: end;
 }
 @media (max-width: 550px) {
+}
+.label {
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  padding: 5px 1rem;
+  transform: translate(50%, 50%);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+  background-color: config.$color-gold;
+  white-space: nowrap;
+  color: config.$color-black;
 }
