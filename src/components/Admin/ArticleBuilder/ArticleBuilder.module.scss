@@ -1,0 +1,17 @@
+@use "../../../styles/config.scss" as config;
+.articleContainer {
+  background-color: config.$color-light-gray-background;
+  margin-top: 3rem;
+  min-height: 70vh;
+  border-radius: 20px;
+  // max-width: 1000px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.menuButton {
+  position: fixed;
+  bottom: 5%;
+  right: 10%;
+}

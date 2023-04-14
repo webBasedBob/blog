@@ -66,9 +66,11 @@ export default function Navigation() {
               placeholder="Keywords here"
             />
           </span>
-          <Button className={styles.searchBtn} variant="light">
-            Search
-          </Button>
+          <Link className={styles.searchBtnLink} href="/search">
+            <Button className={styles.searchBtn} variant="light">
+              Search
+            </Button>
+          </Link>
         </div>
       ),
       isIcon: true,

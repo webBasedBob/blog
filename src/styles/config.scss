@@ -4,6 +4,7 @@ $color-gold: #ffd700;
 $color-blue: #0079ff;
 $color-red: #ff0051;
 $color-light-gray: #e6e6e6;
+$color-light-gray-background: #ebebeb;
 @mixin gradientBottomRight {
   background-image: linear-gradient(
     to right top,

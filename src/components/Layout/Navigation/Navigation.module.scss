@@ -124,8 +124,13 @@
 }
 .searchBtn {
   outline: solid 1px #fff;
-  margin-left: 10px;
 }
+.searchBtnLink {
+  margin-left: 10px;
+  display: flex;
+  text-decoration: none;
+}
+
 .searchinput {
   outline: solid 1px #fff;
 }
@@ -182,10 +187,14 @@
     padding: 0;
     position: absolute;
     bottom: -8rem;
+    left: -1rem;
     & .searchinput {
     }
     & .searchBtn {
+    }
+    .searchBtnLink {
       margin: 0;
+      flex-direction: column;
     }
   }
 }
