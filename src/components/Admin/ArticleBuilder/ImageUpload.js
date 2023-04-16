@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { FileUpload } from "primereact/fileupload";
 import { ProgressBar } from "primereact/progressbar";
@@ -8,45 +8,49 @@ import { Tag } from "primereact/tag";
 import { Container } from "react-bootstrap";
 import styles from "./ImageUpload.module.scss";
 import { InputTextarea } from "primereact/inputtextarea";
-export default function ArticleMainImageInput({ type = "regular" }) {
-  const toast = useRef(null);
-  const [totalSize, setTotalSize] = useState(0);
+import { debounce, getBase64, getFileFromBase64 } from "@/utils/helperFn";
+import { useDispatch, useSelector } from "react-redux";
+import { newArticleActions } from "@/store/new-article";
+export default function ArticleMainImageInput({ type = "regular", id }) {
+  const dispatch = useDispatch();
+
+  const updateSectionData = (dataConfigObj) => {
+    dispatch(newArticleActions.updateImageData(dataConfigObj));
+  };
+  const resetState = () => {
+    dispatch(
+      newArticleActions.updateImageData({
+        componentName: `image-${type}`,
+        id: id,
+        dataToUpdate: type === "gallery" ? "images" : "image",
+        newData: [],
+      })
+    );
+  };
+
+  const handleOnSelect = async (e) => {
+    let data = e.files;
+    console.log(data);
+    let transformedData = [];
+    for (let index = 0; index < data.length; index++) {
+      console.log(data[index]);
+      const imageName = data[index].name;
+      const base64Image = await getBase64(data[index]);
+      transformedData.push({
+        title: imageName,
+        base64Image: base64Image,
+      });
+    }
+    updateSectionData({
+      componentName: `image-${type}`,
+      id: id,
+      dataToUpdate: type === "gallery" ? "images" : "image",
+      newData: transformedData,
+    });
+  };
+
   const fileUploadRef = useRef(null);
-
-  const onTemplateSelect = (e) => {
-    let _totalSize = totalSize;
-    let files = e.files;
-
-    Object.keys(files).forEach((key) => {
-      _totalSize += files[key].size || 0;
-    });
-
-    setTotalSize(_totalSize);
-  };
-
-  const onTemplateUpload = (e) => {
-    let _totalSize = 0;
-
-    e.files.forEach((file) => {
-      _totalSize += file.size || 0;
-    });
-
-    setTotalSize(_totalSize);
-    toast.current.show({
-      severity: "info",
-      summary: "Success",
-      detail: "File Uploaded",
-    });
-  };
-
-  const onTemplateRemove = (file, callback) => {
-    setTotalSize(totalSize - file.size);
-    callback();
-  };
-
-  const onTemplateClear = () => {
-    setTotalSize(0);
-  };
+  const toast = useRef(null);
 
   const headerTemplate = (options) => {
     const { className, chooseButton, cancelButton } = options;
@@ -124,24 +128,28 @@ export default function ArticleMainImageInput({ type = "regular" }) {
       <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
       <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
       <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
-
+      <h5 className={styles.sectionTitle}>
+        {type === "main"
+          ? "Main Image"
+          : type === "gallery"
+          ? "Gallery"
+          : "Image"}
+        :
+      </h5>
       <FileUpload
         ref={fileUploadRef}
         name="demo[]"
-        url="/api/upload"
         multiple={type === "gallery"}
         accept="image/*"
         maxFileSize={1000000000}
-        onUpload={onTemplateUpload}
-        onSelect={onTemplateSelect}
-        onError={onTemplateClear}
-        onClear={onTemplateClear}
         headerTemplate={headerTemplate}
         itemTemplate={itemTemplate}
         emptyTemplate={emptyTemplate}
         chooseOptions={chooseOptions}
         uploadOptions={uploadOptions}
         cancelOptions={cancelOptions}
+        onSelect={handleOnSelect}
+        onClear={resetState}
       />
       {type !== "gallery" && (
         <InputTextarea

@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./ArticleBuilder.module.scss";
-import { Button } from "primereact/button";
-import { Menu } from "primereact/menu";
+import Menu from "./Menu";
 import { Container } from "react-bootstrap";
 import Navigation from "../../Layout/Navigation/Navigation";
 import PageWrapper from "../../UI/PageWrapper";
@@ -9,33 +8,36 @@ import { InputText } from "primereact/inputtext";
 import ArticleTitleInput from "./TitleInput";
 import ArticleMainImageInput from "./ImageUpload";
 import TextSection from "./TextSection";
+import { useDispatch, useSelector } from "react-redux";
+import { newArticleActions } from "@/store/new-article";
+
+const getSectionComponent = (componentName, props) => {
+  const components = {
+    title: <ArticleTitleInput {...props} />,
+    "image-main": <ArticleMainImageInput type="main" {...props} />,
+    "text-section": <TextSection {...props} />,
+    "image-regular": <ArticleMainImageInput {...props} />,
+    "image-gallery": <ArticleMainImageInput type="gallery" {...props} />,
+  };
+  return components[componentName];
+};
 const BlogPostEditor = () => {
-  const items = [
-    { label: "Add Title", icon: "pi pi-pencil" },
-    { label: "Add Main Image", icon: "pi pi-image" },
-    { label: "Add Text Section", icon: "pi pi-pencil" },
-    { label: "Add Image Section", icon: "pi pi-image" },
-    { label: "Add Gallery", icon: "pi pi-images" },
-  ];
-  const menuRef = useRef();
+  const dispatch = useDispatch();
+  const sections = useSelector((state) => state.newArticle.sections);
+
+  const addSection = (sectionName) => {
+    dispatch(newArticleActions.addSection(sectionName));
+  };
   return (
     <>
       <Navigation />
       <PageWrapper>
         <Container className={styles.articleContainer}>
-          <ArticleTitleInput />
-          <ArticleMainImageInput type="main" />
-          <TextSection />
-          <ArticleMainImageInput />
-          <ArticleMainImageInput type="gallery" />
+          {sections.map((section) => {
+            return getSectionComponent(section.componentName, section.props);
+          })}
         </Container>
-        <Menu model={items} popup ref={menuRef} />
-        <Button
-          className={styles.menuButton}
-          label="Add Section"
-          icon="pi pi-plus"
-          onClick={(e) => menuRef.current.toggle(e)}
-        />
+        <Menu handleAddSection={addSection} />
       </PageWrapper>
     </>
   );

@@ -4,25 +4,46 @@ import { Container } from "react-bootstrap";
 import { InputText } from "primereact/inputtext";
 
 import { InputTextarea } from "primereact/inputtextarea";
+import { debounce } from "@/utils/helperFn";
+import { useDispatch, useSelector } from "react-redux";
+import { newArticleActions } from "@/store/new-article";
+const TextSection = ({ id }) => {
+  const dispatch = useDispatch();
+  const sectionData = useSelector((state) => {
+    return state.newArticle.sections.find((section) => {
+      return section.id === id;
+    }).data;
+  });
 
-const TextSection = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const updateSectionData = (...args) => {
+    dispatch(newArticleActions.updateData(...args));
+  };
   return (
     <Container className={styles.sectionContainer}>
+      <h5 className={styles.sectionTitle}>Text Section:</h5>
       <InputText
         placeholder="Section Title"
-        value={title}
+        value={sectionData.title ? sectionData.title : ""}
         onChange={(e) => {
-          setTitle(e.target.value);
+          updateSectionData({
+            componentName: "text-section",
+            id: id,
+            dataToUpdate: "title",
+            newData: e.target.value,
+          });
         }}
         className={styles.title}
       />
       <InputTextarea
         placeholder="Section Content"
-        value={content}
+        value={sectionData.content ? sectionData.content : ""}
         onChange={(e) => {
-          setContent(e.target.value);
+          updateSectionData({
+            componentName: "text-section",
+            id: id,
+            dataToUpdate: "content",
+            newData: e.target.value,
+          });
         }}
         className={styles.content}
       />

@@ -1,3 +1,7 @@
+@use "../../../styles/config.scss" as config;
+.sectionTitle {
+  color: config.$color-text-black;
+}
 .articleTitleInput {
   width: 100%;
   // margin: 1rem;s
