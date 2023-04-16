@@ -30,7 +30,7 @@ const mergeImagesNoDuplicates = (arr1, arr2) => {
   });
   return mergedArr;
 };
-export const newArticle = createSlice({
+export const newArticleStore = createSlice({
   name: "new-article",
   initialState: { sections: [] },
   reducers: {
@@ -80,4 +80,4 @@ export const newArticle = createSlice({
     addTextSection(state, action) {},
   },
 });
-export const newArticleActions = newArticle.actions;
+export const newArticleActions = newArticleStore.actions;

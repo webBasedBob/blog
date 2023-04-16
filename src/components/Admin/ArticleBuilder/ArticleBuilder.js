@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styles from "./ArticleBuilder.module.scss";
-import Menu from "./Menu";
+import Toolbar from "./Toolbar";
 import { Container } from "react-bootstrap";
 import Navigation from "../../Layout/Navigation/Navigation";
 import PageWrapper from "../../UI/PageWrapper";
@@ -28,6 +28,7 @@ const BlogPostEditor = () => {
   const addSection = (sectionName) => {
     dispatch(newArticleActions.addSection(sectionName));
   };
+
   return (
     <>
       <Navigation />
@@ -37,7 +38,7 @@ const BlogPostEditor = () => {
             return getSectionComponent(section.componentName, section.props);
           })}
         </Container>
-        <Menu handleAddSection={addSection} />
+        <Toolbar handleAddSection={addSection} />
       </PageWrapper>
     </>
   );

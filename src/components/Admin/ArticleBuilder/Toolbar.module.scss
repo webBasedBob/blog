@@ -1,0 +1,14 @@
+.container {
+  position: fixed;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.toolbar {
+  width: 100%;
+}
+@media (min-width: 1000px) {
+  .container {
+    max-width: 1000px;
+  }
+} ;
