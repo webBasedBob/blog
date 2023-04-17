@@ -72,6 +72,8 @@ export const newArticleStore = createSlice({
         targetSection[dataToUpdate] = targetSection[dataToUpdate]
           ? mergeImagesNoDuplicates(targetSection[dataToUpdate], newData)
           : newData;
+      } else {
+        targetSection[dataToUpdate] = newData;
       }
     },
     addMainImage(state, action) {},

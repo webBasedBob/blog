@@ -14,9 +14,17 @@ import { newArticleActions } from "@/store/new-article";
 export default function ArticleMainImageInput({ type = "regular", id }) {
   const dispatch = useDispatch();
 
-  const updateSectionData = (dataConfigObj) => {
+  const updateSectionImage = (dataConfigObj) => {
     dispatch(newArticleActions.updateImageData(dataConfigObj));
   };
+  const updateSectionCaption = (...args) => {
+    dispatch(newArticleActions.updateData(...args));
+  };
+  const sectionCaption = useSelector((state) => {
+    return state.newArticle.sections.find((section) => {
+      return section.id === id;
+    }).data.caption;
+  });
   const resetState = () => {
     dispatch(
       newArticleActions.updateImageData({
@@ -29,11 +37,9 @@ export default function ArticleMainImageInput({ type = "regular", id }) {
   };
 
   const handleOnSelect = async (e) => {
-    let data = e.files;
-    console.log(data);
+    let data = Array.from(e.files);
     let transformedData = [];
     for (let index = 0; index < data.length; index++) {
-      console.log(data[index]);
       const imageName = data[index].name;
       const base64Image = await getBase64(data[index]);
       transformedData.push({
@@ -41,7 +47,7 @@ export default function ArticleMainImageInput({ type = "regular", id }) {
         base64Image: base64Image,
       });
     }
-    updateSectionData({
+    updateSectionImage({
       componentName: `image-${type}`,
       id: id,
       dataToUpdate: type === "gallery" ? "images" : "image",
@@ -115,7 +121,6 @@ export default function ArticleMainImageInput({ type = "regular", id }) {
     className:
       "custom-cancel-btn p-button-danger p-button-rounded p-button-outlined",
   };
-  const [caption, setCaption] = useState("");
 
   return (
     <Container
@@ -154,9 +159,14 @@ export default function ArticleMainImageInput({ type = "regular", id }) {
       {type !== "gallery" && (
         <InputTextarea
           className={styles.caption}
-          value={caption}
+          value={sectionCaption ? sectionCaption : ""}
           onChange={(e) => {
-            setCaption(e.target.value);
+            updateSectionCaption({
+              componentName: `image-${type}`,
+              id: id,
+              dataToUpdate: "caption",
+              newData: e.target.value,
+            });
           }}
           placeholder="Image Caption"
         />

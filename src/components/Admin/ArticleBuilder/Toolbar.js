@@ -56,11 +56,13 @@ const ArticleBuilderToolbar = ({ handleAddSection }) => {
     try {
       finalArticleData = await prepareArticleDataForUpload(newArticleData);
     } catch (error) {
+      throw error;
       dispatch(errorActions.setError(error.message));
       return;
     }
+
     storeLiveDatabase(
-      `articles/${finalArticleData.title.title}`,
+      `articles/${finalArticleData.title.data.title}`,
       finalArticleData
     );
   };

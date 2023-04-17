@@ -54,6 +54,11 @@ export const handleImageUpload = async (imageObj, path) => {
   return { name: imageFile.name, url: imageUrl };
 };
 
+const transformImageName = (imgName) => {
+  console.log(imgName);
+  return imgName.slice(0, imgName.indexOf("."));
+};
+
 export const prepareArticleDataForUpload = async (newArticleData) => {
   const finalArticleData = {};
 
@@ -65,27 +70,42 @@ export const prepareArticleDataForUpload = async (newArticleData) => {
     if (sectionIsEmpty) {
       throw new Error("A section you try to upload is empty.");
     }
-
     if (targetSectionName.includes("image")) {
       if (targetSectionName.includes("gallery")) {
         const imagesArr = targetSection.data.images;
-        const galleryFinalData = [];
+        const galleryFinalData = {};
 
         for (let i = 0; i < imagesArr.length; i++) {
-          galleryFinalData.push(
-            await handleImageUpload(imagesArr[i], "articles-images")
+          const imageDataObj = await handleImageUpload(
+            imagesArr[i],
+            "articles-images"
           );
+          galleryFinalData[transformImageName(imageDataObj.name)] =
+            imageDataObj.url;
         }
 
-        finalArticleData[targetSectionName] = galleryFinalData;
+        finalArticleData[targetSectionName] = {
+          order: index,
+          data: galleryFinalData,
+        };
       } else {
-        finalArticleData[targetSectionName] = await handleImageUpload(
-          newArticleData[0].data.image,
+        const imageDataObj = await handleImageUpload(
+          targetSection.data.image[0],
           "articles-images"
         );
+        finalArticleData[targetSectionName] = {
+          order: index,
+          data: {
+            [transformImageName(imageDataObj.name)]: imageDataObj.url,
+            caption: targetSection.data.caption,
+          },
+        };
       }
     } else {
-      finalArticleData[targetSectionName] = targetSection.data;
+      finalArticleData[targetSectionName] = {
+        order: index,
+        data: targetSection.data,
+      };
     }
   }
   return finalArticleData;

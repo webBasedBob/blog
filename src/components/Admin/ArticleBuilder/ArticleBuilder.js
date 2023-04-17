@@ -10,6 +10,7 @@ import ArticleMainImageInput from "./ImageUpload";
 import TextSection from "./TextSection";
 import { useDispatch, useSelector } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
+import ErrorModal from "@/components/ErrorModal/ErrorModal";
 
 const getSectionComponent = (componentName, props) => {
   const components = {
@@ -31,6 +32,7 @@ const BlogPostEditor = () => {
 
   return (
     <>
+      <ErrorModal />
       <Navigation />
       <PageWrapper>
         <Container className={styles.articleContainer}>
