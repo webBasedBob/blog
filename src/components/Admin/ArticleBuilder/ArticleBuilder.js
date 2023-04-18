@@ -11,6 +11,7 @@ import TextSection from "./TextSection";
 import { useDispatch, useSelector } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
 import ErrorModal from "@/components/ErrorModal/ErrorModal";
+import LabelDropdown from "./MetaData";
 
 const getSectionComponent = (componentName, props) => {
   const components = {
@@ -36,6 +37,7 @@ const BlogPostEditor = () => {
       <Navigation />
       <PageWrapper>
         <Container className={styles.articleContainer}>
+          <LabelDropdown />
           {sections.map((section) => {
             return getSectionComponent(section.componentName, section.props);
           })}

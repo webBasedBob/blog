@@ -1,4 +1,4 @@
-import { getImgUrl, storeImage } from "./firebaseFn";
+import { getImgUrl, getLiveDatabase, storeImage } from "./firebaseFn";
 export const debounce = (callBack, timeout = 500) => {
   let timer;
   return (...args) => {
@@ -54,16 +54,16 @@ export const handleImageUpload = async (imageObj, path) => {
   return { name: imageFile.name, url: imageUrl };
 };
 
-const transformImageName = (imgName) => {
-  console.log(imgName);
-  return imgName.slice(0, imgName.indexOf("."));
-};
+const getMetaData = () => {};
 
-export const prepareArticleDataForUpload = async (newArticleData) => {
+export const prepareArticleDataForUpload = async (
+  newArticleSections,
+  newArticleMetaData
+) => {
   const finalArticleData = {};
-
-  for (let index = 0; index < newArticleData.length; index++) {
-    const targetSection = newArticleData[index];
+  debugger;
+  for (let index = 0; index < newArticleSections.length; index++) {
+    const targetSection = newArticleSections[index];
     const targetSectionName = targetSection.componentName;
     const sectionIsEmpty = !Object.keys(targetSection.data).length;
 
@@ -80,11 +80,10 @@ export const prepareArticleDataForUpload = async (newArticleData) => {
             imagesArr[i],
             "articles-images"
           );
-          galleryFinalData[transformImageName(imageDataObj.name)] =
-            imageDataObj.url;
+          galleryFinalData.image = imageDataObj.url;
         }
-
-        finalArticleData[targetSectionName] = {
+        finalArticleData[targetSection.id] = {
+          sectionName: targetSectionName,
           order: index,
           data: galleryFinalData,
         };
@@ -93,20 +92,48 @@ export const prepareArticleDataForUpload = async (newArticleData) => {
           targetSection.data.image[0],
           "articles-images"
         );
-        finalArticleData[targetSectionName] = {
+
+        finalArticleData[targetSection.id] = {
+          sectionName: targetSectionName,
           order: index,
           data: {
-            [transformImageName(imageDataObj.name)]: imageDataObj.url,
-            caption: targetSection.data.caption,
+            image: imageDataObj.url,
+            caption: targetSection.data.caption || "",
           },
         };
       }
     } else {
-      finalArticleData[targetSectionName] = {
+      finalArticleData[targetSection.id] = {
+        sectionName: targetSectionName,
         order: index,
         data: targetSection.data,
       };
     }
   }
-  return finalArticleData;
+  //adding metadata before returning
+
+  return { content: finalArticleData, metaData: newArticleMetaData };
+};
+
+export const canUploadData = async (title, newArticleData) => {
+  if (!title) {
+    throw new Error("The article does not have a title.");
+  }
+  const titleAlreadyUsed = await getLiveDatabase(`articles/${title}`);
+  if (titleAlreadyUsed) {
+    throw new Error("The title of your article is already used.");
+  }
+  const articleLabel = newArticleData.metaData.label;
+  if (!articleLabel) {
+    throw new Error("The article does not have a category.");
+  }
+  const articleDate = newArticleData.metaData.date;
+  if (!articleDate) {
+    throw new Error("The article does not have a date.");
+  }
+  const articleTags = newArticleData.metaData.tags;
+  if (!articleTags?.length) {
+    throw new Error("The article does not have any tags.");
+  }
+  return "";
 };

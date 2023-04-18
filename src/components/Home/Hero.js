@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Hero.module.scss";
-import Header from "../UI/Header";
+import Header from "../Article/Title";
 import HeroCarousel from "./HeroCarousel";
 const Hero = () => {
   return (

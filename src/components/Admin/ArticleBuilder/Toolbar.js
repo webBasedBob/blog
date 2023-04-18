@@ -19,6 +19,7 @@ import {
 } from "@/utils/firebaseFn";
 import { images } from "../../../../next.config";
 import {
+  canUploadData,
   getFileFromBase64,
   prepareArticleDataForUpload,
 } from "@/utils/helperFn";
@@ -33,38 +34,25 @@ const ArticleBuilderToolbar = ({ handleAddSection }) => {
     }).component;
     handleAddSection(targetComponent);
   };
-  const newArticleData = useSelector((state) => state.newArticle.sections);
+  const newArticleData = useSelector((state) => state.newArticle);
 
   const handleSaveAndPublishArticle = async () => {
-    const articleTitle = newArticleData.find((section) => {
+    const articleTitle = newArticleData.sections.find((section) => {
       return section.componentName === "title";
     })?.data.title;
-    if (!articleTitle) {
-      dispatch(errorActions.setError("The article does not have a title."));
-      return;
-    }
-    const titleAlreadyUsed = await getLiveDatabase(
-      `published-articles/${articleTitle}`
-    );
-    if (titleAlreadyUsed) {
-      dispatch(
-        errorActions.setError("The title of your article is already used.")
-      );
-      return;
-    }
     let finalArticleData;
     try {
-      finalArticleData = await prepareArticleDataForUpload(newArticleData);
+      await canUploadData(articleTitle, newArticleData);
+      finalArticleData = await prepareArticleDataForUpload(
+        newArticleData.sections,
+        newArticleData.metaData
+      );
     } catch (error) {
-      throw error;
       dispatch(errorActions.setError(error.message));
       return;
     }
 
-    storeLiveDatabase(
-      `articles/${finalArticleData.title.data.title}`,
-      finalArticleData
-    );
+    storeLiveDatabase(`articles/${articleTitle}`, finalArticleData);
   };
 
   const addSectionItems = [

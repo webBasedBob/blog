@@ -32,7 +32,7 @@ const mergeImagesNoDuplicates = (arr1, arr2) => {
 };
 export const newArticleStore = createSlice({
   name: "new-article",
-  initialState: { sections: [] },
+  initialState: { sections: [], metaData: {} },
   reducers: {
     addSection(state, action) {
       const index = state.sections.length;
@@ -76,7 +76,9 @@ export const newArticleStore = createSlice({
         targetSection[dataToUpdate] = newData;
       }
     },
-    addMainImage(state, action) {},
+    addMetaData(state, action) {
+      state.metaData = { ...state.metaData, ...action.payload };
+    },
     addImage(state, action) {},
     addGallery(state, action) {},
     addTextSection(state, action) {},

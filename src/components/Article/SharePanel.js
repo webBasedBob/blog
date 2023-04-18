@@ -92,7 +92,7 @@ const ShareBtn = ({ text }) => {
   }
   return (
     <OverlayTrigger
-      trigger={["hover"]}
+      trigger={["hover", "focus"]}
       transition={true}
       placement="top"
       delay={{ show: 300, hide: 100 }}

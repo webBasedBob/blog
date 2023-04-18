@@ -36,13 +36,14 @@ const TextSection = ({ id }) => {
       />
       <InputTextarea
         placeholder="Section Content"
-        value={sectionData.content ? sectionData.content : ""}
         onChange={(e) => {
+          let contentParagtaphs = e.target.value.split(/\r?\n/);
+          console.log(contentParagtaphs);
           updateSectionData({
             componentName: "text-section",
             id: id,
             dataToUpdate: "content",
-            newData: e.target.value,
+            newData: contentParagtaphs,
           });
         }}
         className={styles.content}
