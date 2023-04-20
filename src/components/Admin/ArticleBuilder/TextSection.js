@@ -7,6 +7,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { debounce } from "@/utils/helperFn";
 import { useDispatch, useSelector } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
+import { getLiveDatabase } from "@/utils/firebaseFn";
 const TextSection = ({ id }) => {
   const dispatch = useDispatch();
   const sectionData = useSelector((state) => {
@@ -15,7 +16,8 @@ const TextSection = ({ id }) => {
     }).data;
   });
 
-  const updateSectionData = (...args) => {
+  const updateSectionData = async (...args) => {
+    const pula = await getLiveDatabase("articles");
     dispatch(newArticleActions.updateData(...args));
   };
   return (
@@ -38,7 +40,6 @@ const TextSection = ({ id }) => {
         placeholder="Section Content"
         onChange={(e) => {
           let contentParagtaphs = e.target.value.split(/\r?\n/);
-          console.log(contentParagtaphs);
           updateSectionData({
             componentName: "text-section",
             id: id,

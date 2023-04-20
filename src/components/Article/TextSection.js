@@ -4,7 +4,6 @@ import Col from "react-bootstrap/Col";
 import classes from "./TextSection.module.scss";
 
 export default function Section({ title, text }) {
-  console.log(title, text);
   return (
     <Container className={classes.section}>
       <Row>

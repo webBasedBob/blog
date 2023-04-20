@@ -129,7 +129,7 @@ const SharePanel = () => {
   return (
     <Container fluid className={styles.container}>
       {shareIcons.map((platform) => {
-        return <ShareBtn text={platform}></ShareBtn>;
+        return <ShareBtn key={platform} text={platform}></ShareBtn>;
       })}
     </Container>
   );

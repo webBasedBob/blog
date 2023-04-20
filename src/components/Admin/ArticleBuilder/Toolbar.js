@@ -14,12 +14,15 @@ import { errorActions } from "@/store/error";
 import {
   getImgUrl,
   getLiveDatabase,
+  setFirestoreData,
+  setFirestoreDoc,
   storeImage,
   storeLiveDatabase,
 } from "@/utils/firebaseFn";
 import { images } from "../../../../next.config";
 import {
   canUploadData,
+  clearTitle,
   getFileFromBase64,
   prepareArticleDataForUpload,
 } from "@/utils/helperFn";
@@ -37,12 +40,9 @@ const ArticleBuilderToolbar = ({ handleAddSection }) => {
   const newArticleData = useSelector((state) => state.newArticle);
 
   const handleSaveAndPublishArticle = async () => {
-    const articleTitle = newArticleData.sections.find((section) => {
-      return section.componentName === "title";
-    })?.data.title;
     let finalArticleData;
     try {
-      await canUploadData(articleTitle, newArticleData);
+      await canUploadData(newArticleData);
       finalArticleData = await prepareArticleDataForUpload(
         newArticleData.sections,
         newArticleData.metaData
@@ -51,8 +51,7 @@ const ArticleBuilderToolbar = ({ handleAddSection }) => {
       dispatch(errorActions.setError(error.message));
       return;
     }
-
-    storeLiveDatabase(`articles/${articleTitle}`, finalArticleData);
+    setFirestoreDoc(`articles`, finalArticleData);
   };
 
   const addSectionItems = [

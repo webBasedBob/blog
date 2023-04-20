@@ -1,4 +1,9 @@
-import { getImgUrl, getLiveDatabase, storeImage } from "./firebaseFn";
+import {
+  getArticle,
+  getImgUrl,
+  getLiveDatabase,
+  storeImage,
+} from "./firebaseFn";
 export const debounce = (callBack, timeout = 500) => {
   let timer;
   return (...args) => {
@@ -45,10 +50,12 @@ export const getFileFromBase64 = async (base64, name = "palceholder-name") => {
 };
 
 export const handleImageUpload = async (imageObj, path) => {
-  const imageFile = await getFileFromBase64(
-    imageObj.base64Image,
-    imageObj.title
-  );
+  let imageFile;
+  try {
+    imageFile = await getFileFromBase64(imageObj.base64Image, imageObj.title);
+  } catch (error) {
+    throw new Error("A image section does not contain any images");
+  }
   await storeImage(imageFile, path);
   const imageUrl = await getImgUrl(imageFile.name, path);
   return { name: imageFile.name, url: imageUrl };
@@ -56,12 +63,46 @@ export const handleImageUpload = async (imageObj, path) => {
 
 const getMetaData = () => {};
 
+export const removeWhitespace = function (str) {
+  const lowerCaseTrimmedStr = str.trim().toLowerCase();
+  const trimmedCharArr = lowerCaseTrimmedStr.split("").filter((char, index) => {
+    if (char !== " ") {
+      return true;
+    } else if (lowerCaseTrimmedStr[index - 1] == " ") {
+      return false;
+    } else {
+      return true;
+    }
+  });
+  return trimmedCharArr.join("");
+};
+
+export const clearTitle = function (title) {
+  try {
+    const cleanTitle = removeWhitespace(title);
+    return cleanTitle;
+  } catch (error) {
+    throw new Error("The article does not have a title.");
+  }
+};
+
+const createSearchData = (title, metadata) => {
+  let searchDataArr = [];
+  const titleWords = title.split(" ");
+  const labelWords = metadata.label.split(" ");
+  searchDataArr.push(
+    ...[title, metadata.label, ...titleWords, ...metadata.tags, ...labelWords]
+  );
+  return searchDataArr;
+};
+
 export const prepareArticleDataForUpload = async (
   newArticleSections,
   newArticleMetaData
 ) => {
   const finalArticleData = {};
-  debugger;
+  let url;
+  let title;
   for (let index = 0; index < newArticleSections.length; index++) {
     const targetSection = newArticleSections[index];
     const targetSectionName = targetSection.componentName;
@@ -102,6 +143,14 @@ export const prepareArticleDataForUpload = async (
           },
         };
       }
+    } else if (targetSectionName === "title") {
+      title = clearTitle(targetSection.data.title);
+      finalArticleData[targetSection.id] = {
+        sectionName: targetSectionName,
+        order: index,
+        data: { title: title },
+      };
+      url = encodeTitleToUrl(title);
     } else {
       finalArticleData[targetSection.id] = {
         sectionName: targetSectionName,
@@ -110,18 +159,62 @@ export const prepareArticleDataForUpload = async (
       };
     }
   }
-  //adding metadata before returning
-
-  return { content: finalArticleData, metaData: newArticleMetaData };
+  const searchData = createSearchData(title, newArticleMetaData);
+  return {
+    content: finalArticleData,
+    metaData: newArticleMetaData,
+    url: url,
+    searchData: searchData,
+  };
 };
 
-export const canUploadData = async (title, newArticleData) => {
+const encodeTitleToUrl = (title) => {
+  const noSymbolsTitle = title
+    .split("")
+    .filter((char) => {
+      if (
+        (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122) ||
+        char.charCodeAt(0) === 32
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .join("");
+
+  let cleanUrl = removeWhitespace(noSymbolsTitle)
+    .split("")
+    .map((char) => {
+      if (char === " ") {
+        return "-";
+      } else {
+        return char;
+      }
+    })
+    .join("");
+  return cleanUrl;
+};
+
+const decodeUrlToTitle = (url) => {
+  return url.slpit("-").join(" ");
+};
+
+export const canUploadData = async (newArticleData) => {
+  const rawTitle = newArticleData.sections.find((section) => {
+    return section.componentName === "title";
+  })?.data.title;
+
+  let title = clearTitle(rawTitle);
   if (!title) {
     throw new Error("The article does not have a title.");
   }
-  const titleAlreadyUsed = await getLiveDatabase(`articles/${title}`);
+  const url = encodeTitleToUrl(title);
+  const titleAlreadyUsed = await getArticle(url);
   if (titleAlreadyUsed) {
-    throw new Error("The title of your article is already used.");
+    throw new Error(
+      "The title of your article is already used or this is a duplicate article."
+    );
   }
   const articleLabel = newArticleData.metaData.label;
   if (!articleLabel) {
@@ -134,6 +227,12 @@ export const canUploadData = async (title, newArticleData) => {
   const articleTags = newArticleData.metaData.tags;
   if (!articleTags?.length) {
     throw new Error("The article does not have any tags.");
+  }
+  const mainInage = newArticleData.sections.find((section) => {
+    return section.componentName === "image-main";
+  });
+  if (!mainInage) {
+    throw new Error("The article does not have a main image.");
   }
   return "";
 };

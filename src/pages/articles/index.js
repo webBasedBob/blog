@@ -72,9 +72,9 @@ export default function Home() {
         <Row>
           <Article article={null} />
         </Row>
-        <Row>
+        {/* <Row>
           <SuggestedArticles articles={articles}></SuggestedArticles>
-        </Row>
+        </Row> */}
       </PageWrapper>
     </>
   );

@@ -5,27 +5,39 @@ import ArticleImage from "./ArticleImage";
 import Introduction from "./Introduction";
 import TextSection from "./TextSection";
 import Container from "react-bootstrap/Container";
-import { getLiveDatabase } from "@/utils/firebaseFn";
+import {
+  getFirestoreArticles,
+  getFirestoreDoc,
+  getFirestoreRelatedArticles,
+  getLiveDatabase,
+  getArticle,
+} from "@/utils/firebaseFn";
 import { useEffect, useState } from "react";
 import Title from "./Title";
 export default function Article({ article2 }) {
   const [articleData, setArticleData] = useState();
   const [article, setArticle] = useState();
-  async function getArticle() {
-    const articles = await getLiveDatabase("articles/");
+  async function getArticleeeee() {
+    const articles = await getFirestoreArticles();
     const article = articles[Object.keys(articles)[0]];
     const articleData = Object.values(article.content);
     articleData.sort((entryA, entryB) => {
       return entryA.order - entryB.order;
     });
-    console.log(articleData);
     setArticleData(articleData);
+    getArticle();
+    getFirestoreRelatedArticles("Side Hustler", ["ideas", "ai"], 5);
   }
   const getRightSectionComponent = (articleSectionData) => {
     const articleSectionsDictionary = {
-      title: <Title>{articleSectionData.data.title}</Title>,
+      title: (
+        <Title key={articleSectionData.data.title}>
+          {articleSectionData.data.title}
+        </Title>
+      ),
       "text-section": (
         <TextSection
+          key={articleSectionData.data.title}
           title={articleSectionData.data.title}
           text={articleSectionData.data.content}
         />
@@ -33,6 +45,7 @@ export default function Article({ article2 }) {
       "image-gallery": "",
       "image-main": (
         <ArticleImage
+          key={articleSectionData.data.image}
           src={articleSectionData.data.image}
           caption={articleSectionData.data.caption}
         />
@@ -42,7 +55,7 @@ export default function Article({ article2 }) {
     return articleSectionsDictionary[articleSectionData.sectionName];
   };
   useEffect(() => {
-    getArticle();
+    getArticleeeee();
   }, []);
   useEffect(() => {
     if (articleData) {

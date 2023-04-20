@@ -17,7 +17,6 @@ export default function MetaData() {
   const [date, setDate] = useState(null);
 
   const [value, setValue] = useState([]);
-  console.log(value);
   return (
     <div className={styles.container}>
       <div className="p-float-label">
