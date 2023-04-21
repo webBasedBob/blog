@@ -31,21 +31,21 @@ export default function Navigation() {
         <div className={styles.articlesLinksWrapper}>
           <button className={styles.navItem} type="button">
             {" "}
-            <Link className={styles.navLink} href="/articles#entrepreneur">
+            <Link className={styles.navLink} href="/articles/entrepreneur">
               entrepreneur hustler
             </Link>
           </button>
           {/* <Divider className={styles.divider} layout="vertical"></Divider> */}
           <button className={styles.navItem} type="button">
             {" "}
-            <Link className={styles.navLink} href="/articles#side">
+            <Link className={styles.navLink} href="/articles/side-hustler">
               side hustler
             </Link>
           </button>
           {/* <Divider className={styles.divider} layout="vertical"></Divider> */}
           <button className={styles.navItem} type="button">
             {" "}
-            <Link className={styles.navLink} href="/articles#employed">
+            <Link className={styles.navLink} href="/articles/employed">
               employed hustler
             </Link>
           </button>
@@ -133,10 +133,13 @@ export default function Navigation() {
         type="button"
         onClick={canOpenExtraNav ? decoratedOnClick : () => {}}
       >
-        {" "}
-        <Link className={styles.navLink} href={href}>
-          {children}
-        </Link>
+        {canOpenExtraNav ? (
+          <div className={styles.navLink}>{children}</div>
+        ) : (
+          <Link className={styles.navLink} href={href}>
+            {children}
+          </Link>
+        )}
       </button>
     );
   }

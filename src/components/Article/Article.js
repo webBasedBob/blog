@@ -14,20 +14,9 @@ import {
 } from "@/utils/firebaseFn";
 import { useEffect, useState } from "react";
 import Title from "./Title";
-export default function Article({ article2 }) {
-  const [articleData, setArticleData] = useState();
-  const [article, setArticle] = useState();
-  async function getArticleeeee() {
-    const articles = await getFirestoreArticles();
-    const article = articles[Object.keys(articles)[0]];
-    const articleData = Object.values(article.content);
-    articleData.sort((entryA, entryB) => {
-      return entryA.order - entryB.order;
-    });
-    setArticleData(articleData);
-    getArticle();
-    getFirestoreRelatedArticles("Side Hustler", ["ideas", "ai"], 5);
-  }
+export default function Article({ article }) {
+  const [articleJSX, setArticleJSX] = useState();
+
   const getRightSectionComponent = (articleSectionData) => {
     const articleSectionsDictionary = {
       title: (
@@ -54,32 +43,18 @@ export default function Article({ article2 }) {
     };
     return articleSectionsDictionary[articleSectionData.sectionName];
   };
+
   useEffect(() => {
-    getArticleeeee();
-  }, []);
-  useEffect(() => {
-    if (articleData) {
-      const articleJSX = [];
-      articleData.forEach((section) => {
-        articleJSX.push(getRightSectionComponent(section));
+    if (article.content) {
+      const sections = Object.values(article.content).sort((entryA, entryB) => {
+        return entryA.order - entryB.order;
       });
-      setArticle(articleJSX);
+      const jsx = [];
+      sections.forEach((section) => {
+        jsx.push(getRightSectionComponent(section));
+      });
+      setArticleJSX(jsx);
     }
-  }, [articleData]);
-  return (
-    <Container>
-      {/* <Hero title={article.title} intro={article.intro} />
-      <Introduction fullIntro={article.fullIntro} />
-      {article.sections.map((section) => {
-        return (
-          <Section
-            text={section.text}
-            title={section.title}
-            key={section.title}
-          />
-        );
-      })} */}
-      {article}
-    </Container>
-  );
+  }, [article.content]);
+  return <Container>{articleJSX}</Container>;
 }
