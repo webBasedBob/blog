@@ -1,0 +1,107 @@
+@use "../../../styles/config.scss" as config;
+@use "../../../styles/animations.scss" as animation;
+
+.navLink {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: config.$color-white;
+  }
+}
+.navBar {
+  background-color: config.$color-black !important;
+  color: config.$color-white !important;
+}
+
+.navItem {
+  margin: 0 10px;
+  text-transform: capitalize;
+  cursor: pointer;
+  padding: 1rem;
+}
+.navItemAutoMargin {
+  margin: 0;
+  margin-left: auto;
+}
+
+.logo {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  padding: 0;
+  margin: 0;
+  z-index: 200;
+  transform: translate(50%, 50%);
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: transparent;
+  // @include config.gradientBottomLeft;
+  padding: 5px;
+  transition: all 0.1s;
+  & img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    position: relative;
+    z-index: 10;
+  }
+}
+.logoBackground {
+  border-radius: 50%;
+  @include config.gradientBottomLeft;
+  transition: all 0.5s;
+  height: 105%;
+  width: 105%;
+  position: absolute;
+  bottom: -2%;
+  right: -22%;
+  @include animation.endless-spin;
+}
+
+.brandName {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  padding: 0;
+  margin: 0;
+  transform: translate(50%, 10%);
+}
+
+.button {
+  margin: 14px;
+}
+@media (min-width: 768px) {
+  .button {
+    display: none;
+  }
+}
+.navItemsContainer {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.accordion {
+  width: 100%;
+  // display: flex;
+  & button:focus {
+    z-index: inherit;
+    border-color: transparent;
+    outline: 0;
+    box-shadow: none;
+  }
+  & * {
+    border: none;
+    background-color: config.$color-black;
+    // font-weight: 600;
+    color: config.$color-white;
+  }
+  & button::after {
+    display: none;
+  }
+}
+.itensWrapper {
+  display: flex;
+}

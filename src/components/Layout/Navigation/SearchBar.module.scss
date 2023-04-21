@@ -1,0 +1,30 @@
+.searchWrapper {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 3rem;
+  gap: 1rem;
+}
+.searchinput {
+  outline: solid 1px #fff;
+}
+.searchBtnLink {
+  margin-left: 10px;
+  display: flex;
+  text-decoration: none;
+}
+.searchBtn {
+  outline: solid 1px #fff;
+}
+
+.offcanvas.searchWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  position: absolute;
+  bottom: -8rem;
+  left: -1rem;
+  .offcanvas.searchBtnLink {
+    margin: 0;
+    flex-direction: column;
+  }
+}
