@@ -6,6 +6,11 @@
 }
 .searchinput {
   outline: solid 1px #fff;
+  width: 100%;
+}
+.inputWrapper {
+  width: 100%;
+  max-width: 30rem;
 }
 .searchBtnLink {
   margin-left: 10px;

@@ -15,6 +15,9 @@ import {
 } from "@/utils/firebaseFn";
 import { useEffect, useInsertionEffect, useState } from "react";
 export default function ArticlePage({ article, suggestedArticles }) {
+  // if (!article) {
+  //   article = getFirestoreArticles();
+  // }
   return (
     <>
       <Navigation />

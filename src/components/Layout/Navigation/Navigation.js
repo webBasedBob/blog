@@ -1,5 +1,4 @@
 import { SearchIcon } from "@/assets/icons";
-import styles from "./Navigation.module.scss";
 import { useState } from "react";
 import OffcanvasNav from "./OffcanvasNav";
 import NavigationBar from "./NavigationBar";

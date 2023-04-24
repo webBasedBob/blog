@@ -1,5 +1,5 @@
 import React from "react";
-import ArticleSearchResult from "../Search/ArticleSearchResult";
+import ArticleSearchResult from "../ArticleResults/ArticleSearchResult";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";

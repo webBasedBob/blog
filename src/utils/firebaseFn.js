@@ -65,6 +65,8 @@ import {
   where,
   limit,
   getDoc,
+  startAfter,
+  orderBy,
 } from "firebase/firestore";
 
 export async function setFirestoreDoc(path, data) {
@@ -110,7 +112,6 @@ export async function getFirestoreRelatedArticles(
   querySnapshot.forEach((doc) => {
     articlesArr.push(doc.data());
   });
-  // console.log(articlesArr);
   return articlesArr;
 }
 // getFirestoreRelatedArticles();
@@ -127,4 +128,27 @@ export const getArticle = async (url) => {
   });
   //handle not finding an article
   return articlesArr[0];
+};
+
+export const getArticlesBySearch = async (
+  category,
+  tagsArr,
+  maxresults = 8
+) => {
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const articlesRef = collection(db, "articles");
+  const q = query(
+    articlesRef,
+    where("metaData.label", "==", category),
+    where("metaData.tags", "array-contains-any", tagsArr),
+    limit(maxresults)
+  );
+  // debugger;
+  const querySnapshot = await getDocs(q);
+  const articlesArr = [];
+  querySnapshot.forEach((doc) => {
+    articlesArr.push(doc.data());
+  });
+  return articlesArr;
 };

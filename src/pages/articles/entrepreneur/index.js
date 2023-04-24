@@ -1,7 +1,8 @@
 import React from "react";
+import ArticlesPage from "@/components/ArticlesPage/ArticlesPage";
 
 const index = () => {
-  return <div>index</div>;
+  return <ArticlesPage page="Entrepreneur Hustler" />;
 };
 
 export default index;

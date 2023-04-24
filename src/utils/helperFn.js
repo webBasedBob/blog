@@ -93,7 +93,10 @@ const createSearchData = (title, metadata) => {
   searchDataArr.push(
     ...[title, metadata.label, ...titleWords, ...metadata.tags, ...labelWords]
   );
-  return searchDataArr;
+  const finalSearchDataArr = searchDataArr.map((el) => {
+    return el.toLowerCase();
+  });
+  return finalSearchDataArr;
 };
 
 export const prepareArticleDataForUpload = async (
@@ -169,20 +172,7 @@ export const prepareArticleDataForUpload = async (
 };
 
 const encodeTitleToUrl = (title) => {
-  const noSymbolsTitle = title
-    .split("")
-    .filter((char) => {
-      if (
-        (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122) ||
-        char.charCodeAt(0) === 32
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    })
-    .join("");
-
+  const noSymbolsTitle = removeSymbols(title);
   let cleanUrl = removeWhitespace(noSymbolsTitle)
     .split("")
     .map((char) => {
@@ -194,6 +184,26 @@ const encodeTitleToUrl = (title) => {
     })
     .join("");
   return cleanUrl;
+};
+
+const removeSymbols = (str) => {
+  const noSymbolsStr = str
+    .trim()
+    .toLowerCase()
+    .split("")
+    .filter((char) => {
+      if (
+        (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122) ||
+        (char.charCodeAt(0) >= 48 && char.charCodeAt(0) <= 57) ||
+        char.charCodeAt(0) === 32
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .join("");
+  return noSymbolsStr;
 };
 
 const decodeUrlToTitle = (url) => {
@@ -235,4 +245,29 @@ export const canUploadData = async (newArticleData) => {
     throw new Error("The article does not have a main image.");
   }
   return "";
+};
+
+export const transformSearchInputString = (str) => {
+  const transformedStr = removeWhitespace(removeSymbols(str)).split(" ");
+  return transformedStr;
+};
+
+export const transormDataForArticleCard = (article) => {
+  const sections = Object.values(article.content);
+  let image = sections.find((section) => section.sectionName === "image-main")
+    .data.image;
+  let title = sections.find((section) => section.sectionName === "title").data
+    .title;
+  let date = article.metaData.date;
+  let label = article.metaData.label;
+  let tags = article.metaData.tags;
+  let url = article.url;
+  return {
+    image: image,
+    title: title,
+    date: date,
+    label: label,
+    tags: tags,
+    url: url,
+  };
 };

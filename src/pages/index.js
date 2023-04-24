@@ -21,6 +21,7 @@ let articles = [
           "afla cum m-am cacatpe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
       {
@@ -29,6 +30,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
       {
@@ -37,6 +39,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
       {
@@ -45,6 +48,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
       {
@@ -53,6 +57,7 @@ let articles = [
           "afla cum m-am cacatpe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
       {
@@ -61,6 +66,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
       {
@@ -69,6 +75,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
       {
@@ -77,6 +84,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
     ],
@@ -90,6 +98,7 @@ let articles = [
           "afla cum m-am cacatpe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "side hustler",
       },
       {
@@ -98,6 +107,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "side hustler",
       },
       {
@@ -106,6 +116,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "side hustler",
       },
       {
@@ -114,6 +125,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "side hustler",
       },
       {
@@ -122,6 +134,7 @@ let articles = [
           "afla cum m-am cacatpe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "side hustler",
       },
       {
@@ -130,6 +143,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "side hustler",
       },
       {
@@ -138,6 +152,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "side hustler",
       },
       {
@@ -146,6 +161,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "side hustler",
       },
     ],
@@ -159,6 +175,7 @@ let articles = [
           "afla cum m-am cacatpe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "employed",
       },
       {
@@ -167,6 +184,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "employed",
       },
       {
@@ -175,6 +193,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "employed",
       },
       {
@@ -183,6 +202,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "employed",
       },
       {
@@ -191,6 +211,7 @@ let articles = [
           "afla cum m-am cacatpe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "employed",
       },
       {
@@ -199,6 +220,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "employed",
       },
       {
@@ -207,6 +229,7 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
       {
@@ -215,12 +238,12 @@ let articles = [
           "afla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mineafla cum m-am cacat pe mine",
         image:
           "https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hero-thumbnail.jpeg?alt=media&token=d9c31047-f6bd-4ff2-9da7-a48e38399ee3",
+        url: "/",
         label: "entrepreneur",
       },
     ],
   },
 ];
-console.log(articles);
 export default function Home() {
   return (
     <>
