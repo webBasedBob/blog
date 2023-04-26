@@ -8,7 +8,8 @@ import { debounce } from "@/utils/helperFn";
 import { useDispatch, useSelector } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
 import { getLiveDatabase } from "@/utils/firebaseFn";
-const TextSection = ({ id }) => {
+
+const Description = ({ id }) => {
   const dispatch = useDispatch();
   const sectionData = useSelector((state) => {
     return state.newArticle.sections.find((section) => {
@@ -21,30 +22,24 @@ const TextSection = ({ id }) => {
   };
   return (
     <Container className={styles.sectionContainer}>
-      <h5 className={styles.sectionTitle}>Text Section:</h5>
-      <InputText
-        placeholder="Section Title"
-        value={sectionData.title ? sectionData.title : ""}
-        onChange={(e) => {
-          updateSectionData({
-            componentName: "text-section",
-            id: id,
-            dataToUpdate: "title",
-            newData: e.target.value,
-          });
-        }}
-        className={styles.title}
-      />
+      <h5 className={styles.sectionTitle}>Description:</h5>
       <InputTextarea
         placeholder="Section Content"
         onChange={(e) => {
-          let contentParagtaphs = e.target.value.split(/\r?\n/);
           updateSectionData({
             componentName: "text-section",
             id: id,
             dataToUpdate: "content",
-            newData: contentParagtaphs,
+            newData: e.target.value,
           });
+          //uncomment this if you want to store paragraphs as array elements
+          // let contentParagtaphs = e.target.value.split(/\r?\n/);
+          // updateSectionData({
+          //   componentName: "text-section",
+          //   id: id,
+          //   dataToUpdate: "content",
+          //   newData: contentParagtaphs,
+          // });
         }}
         className={styles.content}
       />
@@ -52,4 +47,4 @@ const TextSection = ({ id }) => {
   );
 };
 
-export default TextSection;
+export default Description;

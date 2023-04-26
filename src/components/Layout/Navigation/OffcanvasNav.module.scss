@@ -102,7 +102,7 @@
 .offcanvasAccordion {
   display: flex;
   flex-direction: column;
-  & * {
+  & *:not(button[type="submit"]) {
     font-size: 20px;
     border: none;
     background-color: config.$color-black !important;

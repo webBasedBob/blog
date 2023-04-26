@@ -80,6 +80,16 @@ export async function setFirestoreDoc(path, data) {
   }
 }
 
+export async function getFirestoreDocs(path) {
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const querySnapshot = await getDocs(collection(db, "path"));
+  const dataArr = [];
+  querySnapshot.forEach((doc) => {
+    dataArr.push(doc.data());
+  });
+  return dataArr;
+}
 export async function getFirestoreArticles() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);

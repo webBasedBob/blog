@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Hero.module.scss";
-import Header from "../Article/Title";
+import PageTitle from "../UI/PageTitle";
 import HeroCarousel from "./HeroCarousel";
 const Hero = () => {
   return (
@@ -8,7 +8,7 @@ const Hero = () => {
       <div className={styles.imagesContainer}>
         <img src="https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/home-hero.jpg?alt=media&token=f4d304cd-a8bc-47a8-8c44-102c9a03c3c9" />
       </div>
-      <Header className={styles.heroTitle}>hustling insights</Header>
+      <PageTitle className={styles.heroTitle}>hustling insights</PageTitle>
       <HeroCarousel />
     </div>
   );

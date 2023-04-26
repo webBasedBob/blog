@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "./SearchBar.module.scss";
 import { SearchIcon, Menu } from "@/assets/icons";
-import Button from "react-bootstrap/Button";
+import { Button } from "primereact/button";
 import Link from "next/link";
 import { InputText } from "primereact/inputtext";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,7 +48,7 @@ const SearchBar = ({ offcanvas }) => {
           }}
         />
       </span>
-      <Button type="submit" className={styles.searchBtn} variant="light">
+      <Button type="submit" className={styles.searchBtn}>
         Search
       </Button>
     </form>

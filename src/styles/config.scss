@@ -1,7 +1,7 @@
 $color-text-black: #070708;
 
 $color-black: #070708;
-$color-white: #f5f5f5;
+$color-white: #e0e0e0;
 $color-gold: #ffd700;
 $color-blue: #0079ff;
 $color-red: #ff0051;
@@ -25,6 +25,9 @@ $color-light-gray-background: #ebebeb;
   );
 }
 
+@mixin blackLineargradientNav {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 50%, transparent);
+}
 @mixin gradientTopRight {
   background-image: linear-gradient(
     to right bottom,

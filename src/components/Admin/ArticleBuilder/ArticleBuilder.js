@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
 import ErrorModal from "@/components/ErrorModal/ErrorModal";
 import LabelDropdown from "./MetaData";
+import Description from "./Description";
 
 const getSectionComponent = (componentName, props) => {
   const components = {
@@ -20,6 +21,7 @@ const getSectionComponent = (componentName, props) => {
     "text-section": <TextSection {...props} />,
     "image-regular": <ArticleMainImageInput {...props} />,
     "image-gallery": <ArticleMainImageInput type="gallery" {...props} />,
+    description: <Description {...props} />,
   };
   return components[componentName];
 };

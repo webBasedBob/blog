@@ -62,6 +62,12 @@ const ArticleBuilderToolbar = ({ handleAddSection }) => {
       command: liftSelectedSection,
     },
     {
+      label: "Add Description",
+      icon: "pi pi-pencil",
+      component: "description",
+      command: liftSelectedSection,
+    },
+    {
       label: "Add Main Image",
       icon: "pi pi-image",
       component: "image-main",

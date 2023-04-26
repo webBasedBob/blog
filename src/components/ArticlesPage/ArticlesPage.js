@@ -11,8 +11,9 @@ import {
 import { firebaseConfig } from "@/config/firebase";
 import { initializeApp } from "firebase/app";
 import Navigation from "@/components/Layout/Navigation/Navigation";
-import PageTitle from "@/components/ArticleResults/PageTitle";
+import PageTitle from "@/components/UI/PageTitle";
 import ArticleCardResults from "@/components/ArticleResults/ArticleCardResults";
+import PageWrapper from "../UI/PageWrapper";
 
 const ArticlesPage = ({ page }) => {
   const getQueryGetters = () => {
@@ -44,12 +45,14 @@ const ArticlesPage = ({ page }) => {
   return (
     <>
       <Navigation />
-      <PageTitle title={page} />
-      <ArticleCardResults
-        articles={articles}
-        handleMoreResults={getNextBatch}
-        noMoreResults={noMoreResults}
-      />
+      <PageWrapper>
+        <PageTitle>{page}</PageTitle>
+        <ArticleCardResults
+          articles={articles}
+          handleMoreResults={getNextBatch}
+          noMoreResults={noMoreResults}
+        />
+      </PageWrapper>
     </>
   );
 };

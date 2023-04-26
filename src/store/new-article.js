@@ -43,7 +43,7 @@ export const newArticleStore = createSlice({
         id: id,
         data: {},
       };
-      console.log(sectionItem);
+
       state.sections.push(sectionItem);
     },
     updateData(state, action) {
