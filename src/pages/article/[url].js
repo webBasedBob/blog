@@ -22,13 +22,28 @@ export default function ArticlePage({ article, suggestedArticles }) {
   const articleContent = Object.values(article.content);
   const title = articleContent.find((elm) => elm.sectionName === "title").data
     .title;
-  const description = articleContent.find(
-    (elm) => elm.sectionName === "description"
-  )?.data.content;
+  const description =
+    articleContent.find((elm) => elm.sectionName === "description")?.data
+      .content || "";
   const image = articleContent.find(
     (elm) => elm.sectionName === "image-main"
-  )?.data;
-  console.log(articleContent);
+  ).data;
+  const mainImageCaption = image?.caption || "";
+  const richGoogleResultData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: `${title}`,
+    image: `${[image.image]}`,
+    datePublished: `${dateObjToSeoStr(article.metaData.date)}T00:00:00+00:00`,
+    dateModified: `${dateObjToSeoStr(article.metaData.date)}T00:00:00+00:00`,
+    author: [
+      {
+        "@type": "Organization",
+        name: "Hustling Insights",
+        url: "https://hustlinginsights.com",
+      },
+    ],
+  };
   return (
     <>
       <Head>
@@ -47,7 +62,7 @@ export default function ArticlePage({ article, suggestedArticles }) {
         <meta
           property="twitter:description"
           content={
-            description.length < 200 ? description : description.slice(0, 195)
+            description?.length < 200 ? description : description.slice(0, 195)
           }
         />
         <meta property="twitter:title" content={title} />
@@ -55,13 +70,21 @@ export default function ArticlePage({ article, suggestedArticles }) {
         <meta
           property="twitter:image:alt"
           content={
-            image.caption.lengt < 420
-              ? image.caption
-              : image.caption.slice(0, 400)
+            mainImageCaption.length < 420
+              ? mainImageCaption
+              : mainImageCaption.slice(0, 400)
           }
         />
         <meta property="twitter:card" content="article" />
         <meta property="" content="" />
+        {/* rich google result - blog posting */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(richGoogleResultData),
+          }}
+          key="product-jsonld"
+        />
       </Head>
       <Navigation />
       <PageWrapper>
@@ -77,6 +100,7 @@ export default function ArticlePage({ article, suggestedArticles }) {
 }
 import fs from "fs";
 import { EOL } from "os";
+import { dateObjToSeoStr } from "@/utils/helperFn";
 export async function getStaticPaths() {
   //this creates the sitemap file with default links
   const constantLinks = [
@@ -112,6 +136,7 @@ export async function getStaticProps(context) {
 
   const article = await getArticle(url);
   article.fullUrl = fullUrl;
+  article.metaData.date = article.metaData.date.seconds;
   return {
     props: { article: article, suggestedArticles: null },
   };

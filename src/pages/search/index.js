@@ -18,6 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { transformSearchInputString } from "@/utils/helperFn";
 import { searchActions } from "@/store/search";
 import { usePaginatedSearchresults } from "@/hooks/UsePaginatedSearchResults";
+import PageWrapper from "@/components/UI/PageWrapper";
+import styles from "./index.module.scss";
 const index = () => {
   const [noMoreResults, setNoMoreResults] = useState(false);
   const searchInput = useSelector((state) => state.search.searchInput);
@@ -100,13 +102,14 @@ const index = () => {
   return (
     <>
       <Navigation />
-      <PageTitle title="Search" />
-      <SearchPanel />
-      <ArticleCardResults
-        articles={articles}
-        handleMoreResults={pulaa}
-        noMoreResults={noMoreResults}
-      />
+      <PageWrapper className={styles.wrapper}>
+        <SearchPanel />
+        <ArticleCardResults
+          articles={articles}
+          handleMoreResults={pulaa}
+          noMoreResults={noMoreResults}
+        />
+      </PageWrapper>
     </>
   );
 };

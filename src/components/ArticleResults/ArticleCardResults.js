@@ -4,22 +4,28 @@ import { Container, Row } from "react-bootstrap";
 import { Button } from "primereact/button";
 import ArticleSearchResult from "./ArticleSearchResult";
 import {
+  dateObjToStr,
   transformSearchInputString,
   transormDataForArticleCard,
 } from "@/utils/helperFn";
 import PageWrapper from "../UI/PageWrapper";
-const ArticleCardResults = ({ articles, handleMoreResults, noMoreResults }) => {
+const ArticleCardResults = ({
+  articles,
+  handleMoreResults,
+  noMoreResults,
+  className,
+}) => {
   return (
     <PageWrapper>
-      <Container>
-        <Row>
+      <Container className={className}>
+        <Row style={{ justifyContent: "center" }}>
           {articles.map((article) => {
             const transformedArticle = transormDataForArticleCard(article);
             return (
               <ArticleSearchResult
                 image={transformedArticle.image}
                 title={transformedArticle.title}
-                date={transformedArticle.date}
+                date={dateObjToStr(transformedArticle.date)}
                 label={transformedArticle.label}
                 key={transformedArticle.url}
                 url={transformedArticle.url}
@@ -27,10 +33,11 @@ const ArticleCardResults = ({ articles, handleMoreResults, noMoreResults }) => {
             );
           })}
         </Row>
-        <Row>
+        <Row className={styles.buttonWrapper}>
           <Button
+            className={styles.button}
             visible={!noMoreResults}
-            label="See More"
+            label="Load More Results"
             onClick={() => {
               handleMoreResults();
             }}

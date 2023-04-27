@@ -1,0 +1,17 @@
+@use "../../styles/config.scss" as config;
+
+.header {
+  text-align: center;
+  padding: 40px 0;
+  text-transform: capitalize;
+  font-size: 32px;
+  position: relative;
+}
+.container {
+  background-color: config.$color-black;
+  padding: 2rem 0 2rem 0;
+  width: 100%;
+  color: config.$color-white;
+  letter-spacing: 5px;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+}

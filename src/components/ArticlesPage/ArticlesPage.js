@@ -11,10 +11,10 @@ import {
 import { firebaseConfig } from "@/config/firebase";
 import { initializeApp } from "firebase/app";
 import Navigation from "@/components/Layout/Navigation/Navigation";
-import PageTitle from "@/components/UI/PageTitle";
+import PageTitle from "./PageTitle";
 import ArticleCardResults from "@/components/ArticleResults/ArticleCardResults";
 import PageWrapper from "../UI/PageWrapper";
-
+import styles from "./ArticlesPage.module.scss";
 const ArticlesPage = ({ page }) => {
   const getQueryGetters = () => {
     const app = initializeApp(firebaseConfig);
@@ -45,12 +45,13 @@ const ArticlesPage = ({ page }) => {
   return (
     <>
       <Navigation />
+      <PageTitle>{page} Articles</PageTitle>
       <PageWrapper>
-        <PageTitle>{page}</PageTitle>
         <ArticleCardResults
           articles={articles}
           handleMoreResults={getNextBatch}
           noMoreResults={noMoreResults}
+          className={styles.contentWrapper}
         />
       </PageWrapper>
     </>

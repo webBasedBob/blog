@@ -163,6 +163,11 @@ export const prepareArticleDataForUpload = async (
     }
   }
   const searchData = createSearchData(title, newArticleMetaData);
+  newArticleMetaData = {
+    ...newArticleMetaData,
+    date: strToDateObj(newArticleMetaData.date),
+  };
+  console.log(newArticleMetaData);
   return {
     content: finalArticleData,
     metaData: newArticleMetaData,
@@ -270,4 +275,28 @@ export const transormDataForArticleCard = (article) => {
     tags: tags,
     url: url,
   };
+};
+
+export const strToDateObj = (str) => {
+  const dateElements = str.split("/");
+  const dateObj = new Date(
+    dateElements[2],
+    dateElements[1] - 1,
+    dateElements[0]
+  );
+  return dateObj;
+};
+
+export const dateObjToStr = (date) => {
+  const dateObj = new Date(date.seconds * 1000);
+  const str = new Intl.DateTimeFormat("en-UK").format(dateObj);
+  return str;
+};
+export const dateObjToSeoStr = (date) => {
+  debugger;
+  const dateObj = new Date(date * 1000);
+  const year = dateObj.getFullYear();
+  const month = dateObj.getMonth();
+  const day = dateObj.getDate();
+  return `${year}-${month + 1}-${day}`;
 };

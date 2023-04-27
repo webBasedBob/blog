@@ -6,6 +6,7 @@ $card-width: 235px;
   font-size: 1rem;
   color: config.$color-black;
   max-width: $card-width;
+  margin: 2rem 1rem 2rem 1rem;
 }
 .card {
   cursor: pointer;

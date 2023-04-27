@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ArticleSearchResult.module.scss";
 import Card from "react-bootstrap/Card";
 import Link from "next/link";
+import { dateObjToStr } from "@/utils/helperFn";
 
 const ArticleSearchResult = ({ image, title, date, label, url }) => {
   return (

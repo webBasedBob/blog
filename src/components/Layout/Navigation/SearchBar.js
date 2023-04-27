@@ -31,6 +31,9 @@ const SearchBar = ({ offcanvas }) => {
   const searchInput = useSelector((state) => state.search.searchInput);
   const handleSearch = (e) => {
     e.preventDefault();
+    if (!searchInput) {
+      return;
+    }
     const href = "/search";
     router.push(href);
     dispatch(searchActions.setMustperformSearch(true));
