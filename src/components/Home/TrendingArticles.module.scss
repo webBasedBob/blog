@@ -51,20 +51,17 @@
   bottom: 5%;
   left: 50%;
   background-color: config.$color-white;
-  // min-width: 700px;
   width: 50rem;
   transform: translateX(-50%);
-  // background-color: config.$color-black;
   color: config.$color-black;
-  // position: relative;
   max-width: 90%;
-  // width: fit-content;
   padding: 3rem;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
+  align-items: center;
 }
-.button {
+.link {
   color: config.$color-blue;
 }
 .title {
@@ -113,4 +110,4 @@
   .description {
     font-size: 14px;
   }
-} ;
+}

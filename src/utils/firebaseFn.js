@@ -68,6 +68,7 @@ import {
   startAfter,
   orderBy,
 } from "firebase/firestore";
+import { dateObjToStr, transormDataForArticleCard } from "./helperFn";
 
 export async function setFirestoreDoc(path, data) {
   const app = initializeApp(firebaseConfig);
@@ -120,7 +121,9 @@ export async function getFirestoreRelatedArticles(
   const querySnapshot = await getDocs(q);
   const articlesArr = [];
   querySnapshot.forEach((doc) => {
-    articlesArr.push(doc.data());
+    const article = doc.data();
+    article.metaData.date = article.metaData.date.seconds;
+    articlesArr.push(transormDataForArticleCard(article));
   });
   return articlesArr;
 }
@@ -134,7 +137,9 @@ export const getArticle = async (url) => {
   const querySnapshot = await getDocs(q);
   const articlesArr = [];
   querySnapshot.forEach((doc) => {
-    articlesArr.push(doc.data());
+    const article = doc.data();
+    article.metaData.date = article.metaData.date.seconds;
+    articlesArr.push(article);
   });
   //handle not finding an article
   return articlesArr[0];
@@ -162,3 +167,38 @@ export const getArticlesBySearch = async (
   });
   return articlesArr;
 };
+
+export async function getArticlesFromEachCategory(numArticles) {
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const articlesRef = collection(db, "articles");
+  const categories = [
+    "Side Hustler",
+    "Employed Hustler",
+    "Entrepreneur Hustler",
+  ];
+  const result = [];
+
+  for (let i = 0; i < categories.length; i++) {
+    const q = query(
+      articlesRef,
+      where("metaData.label", "==", categories[i]),
+      limit(numArticles)
+    );
+    const querySnapshot = await getDocs(q);
+    const dataArr = [];
+    querySnapshot.forEach((doc) => {
+      const docData = doc.data();
+      const fullUrl = `https://hustlinginsights.com/article/${docData.url}`;
+      docData.fullUrl = fullUrl;
+      docData.metaData.date = dateObjToStr(docData.metaData.date);
+      dataArr.push(transormDataForArticleCard(docData));
+    });
+    result.push({
+      title: categories[i],
+      articles: dataArr,
+    });
+  }
+
+  return result;
+}

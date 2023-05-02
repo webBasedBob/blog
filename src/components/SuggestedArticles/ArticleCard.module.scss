@@ -9,6 +9,7 @@
   border: none;
   border-radius: 20px;
   padding: 1rem;
+  align-items: center;
   &:hover {
     background-color: config.$color-light-gray;
     .image {
@@ -20,11 +21,17 @@
     }
   }
 }
+.link,
+.link:hover {
+  text-decoration: none;
+  color: config.$color-black;
+}
 .image {
   height: 120px;
   width: 120px;
   overflow: hidden;
   border-radius: 50%;
+  flex-shrink: 0;
   & img {
     height: 100%;
     width: 100%;

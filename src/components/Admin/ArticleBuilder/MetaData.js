@@ -5,7 +5,7 @@ import { newArticleActions } from "@/store/new-article";
 import styles from "./MetaData.module.scss";
 import { Calendar } from "primereact/calendar";
 import { Chips } from "primereact/chips";
-import { dateObjToStr } from "@/utils/helperFn";
+import { dateObjToStr, dateObjToStrAdmin } from "@/utils/helperFn";
 export default function MetaData() {
   const dispatch = useDispatch();
   const articleLabels = [
@@ -51,9 +51,10 @@ export default function MetaData() {
         <Calendar
           value={date}
           onChange={(e) => {
+            console.log(e.value);
             dispatch(
               newArticleActions.addMetaData({
-                date: dateObjToStr(e.value),
+                date: dateObjToStrAdmin(e.value),
               })
             );
             setDate(e.value);

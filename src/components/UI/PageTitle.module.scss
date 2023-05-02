@@ -6,6 +6,9 @@
   text-transform: capitalize;
   font-size: 50px;
   position: relative;
+  margin-top: 5rem;
+  display: flex;
+  gap: 1rem;
   &::after {
     content: "";
     height: 5px;
@@ -15,7 +18,4 @@
     bottom: 0;
     left: 0;
   }
-}
-.container {
-  margin-top: 5rem;
 }

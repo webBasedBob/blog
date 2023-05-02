@@ -40,6 +40,28 @@ $card-width: 235px;
     transition: all 0.5s;
   }
 }
+.animate {
+  &::after {
+    content: "";
+    height: 110%;
+    width: 110%;
+    position: absolute;
+    background-color: #fff;
+    left: -10px;
+    top: 0%;
+    border-left: solid 4px #999;
+    transform: translateX(105%);
+    animation: slide-right 1s;
+  }
+}
+@keyframes slide-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(105%);
+  }
+}
 .body {
   // padding: 5px 30px;
   padding: 0;

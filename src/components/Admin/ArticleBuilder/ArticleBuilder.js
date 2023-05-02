@@ -4,16 +4,26 @@ import Toolbar from "./Toolbar";
 import { Container } from "react-bootstrap";
 import Navigation from "../../Layout/Navigation/Navigation";
 import PageWrapper from "../../UI/PageWrapper";
-import { InputText } from "primereact/inputtext";
-import ArticleTitleInput from "./TitleInput";
-import ArticleMainImageInput from "./ImageUpload";
-import TextSection from "./TextSection";
 import { useDispatch, useSelector } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
-import ErrorModal from "@/components/ErrorModal/ErrorModal";
 import LabelDropdown from "./MetaData";
-import Description from "./Description";
+import dynamic from "next/dynamic";
+const ArticleTitleInput = dynamic(() => import("./TitleInput"), {
+  ssr: false,
+});
+const ArticleMainImageInput = dynamic(() => import("./ImageUpload"), {
+  ssr: false,
+});
+const TextSection = dynamic(() => import("./TextSection"), {
+  ssr: false,
+});
+const Description = dynamic(() => import("./Description"), {
+  ssr: false,
+});
 
+const ErrorModal = dynamic(() => import("@/components/ErrorModal/ErrorModal"), {
+  ssr: false,
+});
 const getSectionComponent = (componentName, props) => {
   const components = {
     title: <ArticleTitleInput {...props} />,
@@ -32,10 +42,10 @@ const BlogPostEditor = () => {
   const addSection = (sectionName) => {
     dispatch(newArticleActions.addSection(sectionName));
   };
-
+  const errorMessage = useSelector((state) => state.error.errorMessage);
   return (
     <>
-      <ErrorModal />
+      {errorMessage && <ErrorModal errorMessage={errorMessage} />}
       <Navigation />
       <PageWrapper>
         <Container className={styles.articleContainer}>

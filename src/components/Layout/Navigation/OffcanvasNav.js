@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Accordion from "react-bootstrap/Accordion";
 import Link from "next/link";
 import Icon from "@/components/UI/Icon";
-
+import logo from "../../../assets/logo.png";
 const OffcanvasNav = ({
   showOffcanvas,
   handleCloseOffcanvas,
@@ -52,11 +52,7 @@ const OffcanvasNav = ({
       <Offcanvas.Header closeButton closeVariant="white">
         <Offcanvas.Title>
           <Navbar.Brand href="/" className={styles.logoOffcanvas}>
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hustlinglogo.png?alt=media&token=b823bc15-10de-414c-84b2-57168d364daa"
-              alt="logo"
-              height={50}
-            />
+            <img src={logo.src} alt="logo" height={50} />
             <Navbar.Brand className={styles.logoBackgroundOffcanvas} />
           </Navbar.Brand>
         </Offcanvas.Title>

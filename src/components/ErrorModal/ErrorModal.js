@@ -3,9 +3,8 @@ import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ErrorModal.module.scss";
 import { errorActions } from "@/store/error";
-const ErrorModal = () => {
+const ErrorModal = ({ errorMessage }) => {
   const dispatch = useDispatch();
-  const errorMessage = useSelector((state) => state.error.errorMessage);
 
   const resetErrorState = () => {
     dispatch(errorActions.resetState());

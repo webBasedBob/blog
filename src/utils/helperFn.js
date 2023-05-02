@@ -286,6 +286,10 @@ export const strToDateObj = (str) => {
   );
   return dateObj;
 };
+export const dateObjToStrAdmin = (dateObj) => {
+  const str = new Intl.DateTimeFormat("en-UK").format(dateObj);
+  return str;
+};
 
 export const dateObjToStr = (date) => {
   const dateObj = new Date(date.seconds * 1000);
@@ -293,7 +297,6 @@ export const dateObjToStr = (date) => {
   return str;
 };
 export const dateObjToSeoStr = (date) => {
-  debugger;
   const dateObj = new Date(date * 1000);
   const year = dateObj.getFullYear();
   const month = dateObj.getMonth();

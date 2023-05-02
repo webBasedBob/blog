@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./HeroCarousel.module.scss";
 import Carousel from "react-bootstrap/Carousel";
+import { motion } from "framer-motion";
 
 const CarouselItem = React.forwardRef(({ title, text }, ref) => {
   return (
@@ -40,8 +41,14 @@ const HeroCarousel = () => {
       {data.map((pula) => {
         return (
           <Carousel.Item key={pula.title} className={styles.carouselItem}>
-            <div className={styles.cariuselText}>{pula.text}</div>
-            <h2 className={styles.carouselTitle}>{pula.title}</h2>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 0.5 }}
+            >
+              <div className={styles.cariuselText}>{pula.text}</div>
+              <h2 className={styles.carouselTitle}>{pula.title}</h2>
+            </motion.div>
           </Carousel.Item>
         );
       })}

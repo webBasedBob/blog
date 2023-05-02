@@ -50,7 +50,12 @@
 
 .offcanvas {
   background-color: config.$color-black !important;
-  color: config.$color-white !important;
+  color: config.$color-primary !important;
+  & * {
+    letter-spacing: 3px !important;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+  }
 }
 .logoOffcanvas {
   height: 80px;
@@ -107,7 +112,15 @@
     border: none;
     background-color: config.$color-black !important;
     // font-weight: 600;
-    color: config.$color-white !important;
+    color: config.$color-primary !important;
     text-transform: capitalize;
+    &:hover {
+      text-decoration: none;
+      color: config.$color-white !important;
+    }
+    & button:hover * {
+      text-decoration: none;
+      color: config.$color-white !important;
+    }
   }
 }

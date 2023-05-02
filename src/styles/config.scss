@@ -1,27 +1,38 @@
-$color-text-black: #070708;
+$color-text-black: #151515;
 
-$color-black: #070708;
+$color-black: #151515;
 $color-white: #e0e0e0;
 $color-gold: #ffd700;
+$color-gold-2: #ffda4e;
 $color-blue: #0079ff;
 $color-red: #ff0051;
 $color-light-gray: #e6e6e6;
 $color-light-gray-background: #ebebeb;
+
+$color-second-gradient: #ff43af;
+
+$color-primary: #ffd700;
+$color-text-nav: $color-primary;
+//  this is the one we use
+@mixin gradientBottomLeft {
+  background-image: linear-gradient(
+    to bottom,
+    #ffd700,
+    #ffaa28,
+    #ff7b56,
+    #ff5283,
+    #ff43af
+  );
+}
+
 @mixin gradientBottomRight {
   background-image: linear-gradient(
     to right top,
     #ffd700,
-    #ffa535,
-    #ff716f,
-    #ff52ab,
-    #e45de0,
-    #ce5de4,
-    #b75ee6,
-    #9d5fe8,
-    #cd44cb,
-    #ec1ea5,
-    #fc007c,
-    #ff0051
+    #ffaa28,
+    #ff7b56,
+    #ff5283,
+    #ff43af
   );
 }
 
@@ -98,23 +109,7 @@ $color-light-gray-background: #ebebeb;
     #ff0051
   );
 }
-@mixin gradientBottomLeft {
-  background-image: linear-gradient(
-    to left top,
-    #ffd700,
-    #ffa535,
-    #ff716f,
-    #ff52ab,
-    #e45de0,
-    #ce5de4,
-    #b75ee6,
-    #9d5fe8,
-    #cd44cb,
-    #ec1ea5,
-    #fc007c,
-    #ff0051
-  );
-}
+
 @mixin gradientBottomTop {
   background-image: linear-gradient(
     to top,

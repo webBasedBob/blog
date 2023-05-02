@@ -18,8 +18,7 @@ let themes = [
   "primereact/resources/themes/arya-purple/theme.css",
 ];
 //theme
-import "primereact/resources/themes/bootstrap4-light-purple/theme.css";
-
+import "../theming/mytheme/theme.scss";
 //core
 import "primereact/resources/primereact.min.css";
 
