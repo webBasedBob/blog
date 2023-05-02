@@ -4,7 +4,7 @@ import OffcanvasNav from "./OffcanvasNav";
 import NavigationBar from "./NavigationBar";
 import SearchBar from "./SearchBar";
 import LinksToArticles from "./LinksToArticles";
-export default function Navigation() {
+export default function Navigation({ animation }) {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   const handleCloseOffcanvas = () => setShowOffcanvas(false);
@@ -32,6 +32,7 @@ export default function Navigation() {
   return (
     <>
       <NavigationBar
+        animation={animation}
         handleShowOffcanvas={handleShowOffcanvas}
         navItemsData={navItemsData}
       />

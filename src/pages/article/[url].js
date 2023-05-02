@@ -11,14 +11,11 @@ import { useRouter } from "next/router";
 import {
   getArticle,
   getFirestoreArticles,
+  getFirestoreRelatedArticles,
   setFirestoreDoc,
 } from "@/utils/firebaseFn";
 import { useEffect, useInsertionEffect, useState } from "react";
 export default function ArticlePage({ article, suggestedArticles }) {
-  // if (!article) {
-  //   article = getFirestoreArticles();
-  // }
-
   const articleContent = Object.values(article.content);
   const title = articleContent.find((elm) => elm.sectionName === "title").data
     .title;
@@ -91,9 +88,9 @@ export default function ArticlePage({ article, suggestedArticles }) {
         <Row>
           <Article article={article} />
         </Row>
-        {/* <Row>
-          <SuggestedArticles articles={articles}></SuggestedArticles>
-        </Row> */}
+        <Row>
+          <SuggestedArticles articles={suggestedArticles}></SuggestedArticles>
+        </Row>
       </PageWrapper>
     </>
   );
@@ -115,7 +112,7 @@ export async function getStaticPaths() {
   });
   return {
     paths: paths,
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
@@ -136,8 +133,13 @@ export async function getStaticProps(context) {
 
   const article = await getArticle(url);
   article.fullUrl = fullUrl;
-  article.metaData.date = article.metaData.date.seconds;
+  // article.metaData.date = article.metaData.date.seconds;
+  const suggestedArticles = await getFirestoreRelatedArticles(
+    article.metaData.label,
+    article.metaData.tags,
+    4
+  );
   return {
-    props: { article: article, suggestedArticles: null },
+    props: { article: article, suggestedArticles: suggestedArticles },
   };
 }

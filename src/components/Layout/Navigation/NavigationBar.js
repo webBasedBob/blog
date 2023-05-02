@@ -9,8 +9,9 @@ import Nav from "react-bootstrap/Nav";
 import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import Link from "next/link";
-
-const NavigationBar = ({ handleShowOffcanvas, navItemsData }) => {
+import logo from "../../../assets/logo.png";
+import { motion } from "framer-motion";
+const NavigationBar = ({ handleShowOffcanvas, navItemsData, animation }) => {
   const [expandedNavItem, setExpandedNavItem] = useState({
     isVisible: false,
     content: null,
@@ -71,18 +72,15 @@ const NavigationBar = ({ handleShowOffcanvas, navItemsData }) => {
   });
   return (
     <Navbar className={styles.navBar} bg="light" expand="md" sticky="top">
-      <Container>
+      <Container
+        className={[styles.extraPadding, animation ? styles.animated : ""]}
+      >
         <Navbar.Brand href="/" className={styles.logo}>
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/blog-test-45680.appspot.com/o/hustlinglogo.png?alt=media&token=b823bc15-10de-414c-84b2-57168d364daa"
-            alt="logo"
-            height={50}
-          />
+          <img src={logo.src} alt="logo" height={50} />
+
           <Navbar.Brand className={styles.logoBackground} />
         </Navbar.Brand>
-        <Navbar.Brand className={styles.brandName}>
-          Hustling Insights
-        </Navbar.Brand>
+
         <Button
           className={styles.button}
           variant="dark"

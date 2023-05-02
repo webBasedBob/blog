@@ -3,15 +3,10 @@
 
 .navLink {
   text-decoration: none;
-  &:hover {
-    text-decoration: none;
-    color: config.$color-white;
-  }
 }
 .navBar {
   background-color: config.$color-black !important;
   color: config.$color-white !important;
-
   // &::after {
   //   content: "";
   //   position: absolute;
@@ -21,10 +16,29 @@
   //   // background-color: config.blackLineargradientNav;
   //   z-index: -1;
   // }
+  padding: 0;
   & * {
     letter-spacing: 3px !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;
     font-size: 18px !important;
+    &:hover {
+      text-decoration: none;
+      color: config.$color-white;
+    }
+  }
+}
+.extraPadding {
+  padding: 10px 0 10px 0;
+}
+.animated {
+  animation: enter-from-top 0.5s;
+}
+@keyframes enter-from-top {
+  from {
+    transform: translateY(-200%);
+  }
+  to {
+    transform: translateY(0%);
   }
 }
 
@@ -33,6 +47,10 @@
   text-transform: capitalize;
   cursor: pointer;
   padding: 1rem;
+  &:hover * {
+    text-decoration: none;
+    color: config.$color-white;
+  }
 }
 .navItemAutoMargin {
   margin: 0;
@@ -111,7 +129,7 @@
     border: none;
     background-color: config.$color-black;
     // font-weight: 600;
-    color: config.$color-white;
+    color: config.$color-primary;
   }
   & button::after {
     display: none;
