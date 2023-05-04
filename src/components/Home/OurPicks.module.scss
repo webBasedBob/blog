@@ -15,22 +15,42 @@
 //     margin-bottom: 5rem;
 //   }
 // }
+@use "../../styles/config.scss" as config;
 .wrapper {
   padding: 3rem 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   align-items: center;
-  // max-width: 500px;
-  // overflow: hidden;
+  grid-template-rows: 1fr;
+  column-gap: 2rem;
+  min-height: 90vh;
+  scroll-snap-align: end;
 }
 .sectionTitle {
-  max-width: 1050px;
   width: 100%;
-  padding: 3rem 0;
-  text-transform: capitalize;
+  grid-column: 1/1;
+}
+
+.sectionTitleWord {
 }
 .background {
-  background-color: #f5f5f5;
-  clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);
-  padding: 7rem 0;
+  grid-template-columns: 3fr 1fr;
+
+  & .sectionTitle {
+    grid-column: 2/2;
+    grid-row: 1/1;
+    text-align: end;
+  }
+}
+.carouselWrapper {
+  background-color: config.$color-white;
+  border-radius: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.carousel {
+  width: 100%;
+  max-width: 1200;
+  margin: 0 auto;
 }

@@ -81,6 +81,7 @@
 .container {
   background-color: config.$color-black;
   margin: 0;
+  scroll-snap-align: end;
 }
 
 @media (max-width: 750px) {

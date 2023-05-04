@@ -50,7 +50,7 @@ const index = () => {
             "array-contains-any",
             transformSearchInputString(searchInput)
           ),
-          limit(3)
+          limit(6)
         )
       );
       setIsNewSearch(true);
@@ -90,7 +90,7 @@ const index = () => {
           "array-contains-any",
           transformSearchInputString(searchInput)
         ),
-        limit(3),
+        limit(6),
         startAfter(lastFetchedElm)
       );
       setCurrentQuery(curQuery);

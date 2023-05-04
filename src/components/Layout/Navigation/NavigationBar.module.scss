@@ -6,22 +6,13 @@
 }
 .navBar {
   background-color: config.$color-black !important;
-  color: config.$color-white !important;
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   height: 300%;
-  //   width: 100%;
-  //   // @include config.blackLineargradientNav;
-  //   // background-color: config.blackLineargradientNav;
-  //   z-index: -1;
-  // }
   padding: 0;
+  color: config.$color-white !important;
   & * {
     letter-spacing: 3px !important;
     font-weight: 400 !important;
     font-size: 18px !important;
-    &:hover {
+    &:not(input):hover {
       text-decoration: none;
       color: config.$color-white;
     }
@@ -104,6 +95,7 @@
 
 .button {
   margin: 14px;
+  color: config.$color-primary;
 }
 @media (min-width: 768px) {
   .button {
@@ -129,7 +121,12 @@
     border: none;
     background-color: config.$color-black;
     // font-weight: 600;
-    color: config.$color-primary;
+    &:not(input) {
+      color: config.$color-primary;
+    }
+    & input {
+      color: config.$color-white;
+    }
   }
   & button::after {
     display: none;

@@ -167,7 +167,7 @@ export const prepareArticleDataForUpload = async (
     ...newArticleMetaData,
     date: strToDateObj(newArticleMetaData.date),
   };
-  console.log(newArticleMetaData);
+
   return {
     content: finalArticleData,
     metaData: newArticleMetaData,
@@ -259,14 +259,17 @@ export const transformSearchInputString = (str) => {
 
 export const transormDataForArticleCard = (article) => {
   const sections = Object.values(article.content);
-  let image = sections.find((section) => section.sectionName === "image-main")
+  const image = sections.find((section) => section.sectionName === "image-main")
     .data.image;
-  let title = sections.find((section) => section.sectionName === "title").data
+  const title = sections.find((section) => section.sectionName === "title").data
     .title;
-  let date = article.metaData.date;
-  let label = article.metaData.label;
-  let tags = article.metaData.tags;
-  let url = article.url;
+  const description = sections.find(
+    (section) => section.sectionName === "description"
+  ).data.content;
+  const date = article.metaData.date;
+  const label = article.metaData.label;
+  const tags = article.metaData.tags;
+  const url = article.url;
   return {
     image: image,
     title: title,
@@ -274,6 +277,7 @@ export const transormDataForArticleCard = (article) => {
     label: label,
     tags: tags,
     url: url,
+    description: description,
   };
 };
 

@@ -24,13 +24,6 @@ export default function Article({ article }) {
           {articleSectionData.data.title}
         </Title>
       ),
-      "text-section": (
-        <TextSection
-          key={articleSectionData.data.title}
-          title={articleSectionData.data.title}
-          text={articleSectionData.data.content}
-        />
-      ),
       "image-gallery": "",
       "image-main": (
         <ArticleImage
@@ -40,6 +33,14 @@ export default function Article({ article }) {
         />
       ),
       "image-regular": "",
+      "text-section": (
+        <div
+          key={`${articleSectionData.sectionName}-${articleSectionData.order}`}
+          dangerouslySetInnerHTML={{
+            __html: articleSectionData?.data?.content,
+          }}
+        ></div>
+      ),
     };
     return articleSectionsDictionary[articleSectionData.sectionName];
   };

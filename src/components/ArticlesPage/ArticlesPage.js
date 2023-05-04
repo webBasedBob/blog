@@ -1,5 +1,5 @@
 import { usePaginatedFirestoreArticles } from "@/hooks/usePaginatedFirestoreArticles";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   getFirestore,
   collection,
@@ -24,7 +24,7 @@ const ArticlesPage = ({ page }) => {
       const finalQuery = query(
         articlesRef,
         where("metaData.label", "==", page),
-        limit(3)
+        limit(6)
       );
       return finalQuery;
     };
@@ -32,7 +32,7 @@ const ArticlesPage = ({ page }) => {
       const finalQuery = query(
         articlesRef,
         where("metaData.label", "==", page),
-        limit(3),
+        limit(6),
         startAfter(lastProorResultVisible)
       );
       return finalQuery;
@@ -42,6 +42,9 @@ const ArticlesPage = ({ page }) => {
 
   const { getNextBatch, articles, noMoreResults } =
     usePaginatedFirestoreArticles(...getQueryGetters());
+  useEffect(() => {
+    getNextBatch(true);
+  }, []);
   return (
     <>
       <Navigation />

@@ -1,0 +1,25 @@
+@use "../../styles/config.scss" as config;
+@use "../../styles/animations.scss" as animation;
+.text {
+  text-align: center;
+  margin: 1rem;
+  transform: translateY(100%);
+  background-clip: text;
+  background-color: red;
+  color: transparent !important;
+  @include config.gradientBottomLeft;
+  // @include animation.endless-spin;
+  // background-position: ;
+  animation: backgroundppl 1s infinite;
+  font-size: 50px;
+  // height: 10rem;
+}
+
+@keyframes backgroundppl {
+  from {
+    background-position: top;
+  }
+  to {
+    background-position: bottom;
+  }
+}

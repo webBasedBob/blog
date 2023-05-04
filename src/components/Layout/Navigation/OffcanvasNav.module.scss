@@ -50,7 +50,6 @@
 
 .offcanvas {
   background-color: config.$color-black !important;
-  color: config.$color-primary !important;
   & * {
     letter-spacing: 3px !important;
     font-weight: 400 !important;
@@ -112,9 +111,15 @@
     border: none;
     background-color: config.$color-black !important;
     // font-weight: 600;
-    color: config.$color-primary !important;
     text-transform: capitalize;
-    &:hover {
+    // color: config.$color-primary !important;
+    &:not(input):not(i) {
+      color: config.$color-primary;
+    }
+    & input {
+      color: config.$color-white;
+    }
+    &:not(input):hover {
       text-decoration: none;
       color: config.$color-white !important;
     }

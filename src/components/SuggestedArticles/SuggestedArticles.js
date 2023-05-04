@@ -6,7 +6,6 @@ import Col from "react-bootstrap/Col";
 
 import ArticleCard from "./ArticleCard";
 const SuggestedArticles = ({ articles }) => {
-  console.log(articles);
   return (
     <section>
       <h4 style={{ marginBottom: 44 }}>Suggested Articles</h4>

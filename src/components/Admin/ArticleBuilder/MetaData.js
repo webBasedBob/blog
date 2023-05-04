@@ -51,7 +51,6 @@ export default function MetaData() {
         <Calendar
           value={date}
           onChange={(e) => {
-            console.log(e.value);
             dispatch(
               newArticleActions.addMetaData({
                 date: dateObjToStrAdmin(e.value),

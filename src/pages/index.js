@@ -4,26 +4,48 @@ import Hero from "@/components/Home/Hero";
 import TrendingArticles from "@/components/Home/TrendingArticles";
 import OurPicks from "@/components/Home/OurPicks";
 import { getArticlesFromEachCategory } from "@/utils/firebaseFn";
-
+import SectionTitle from "@/components/Home/SectionTitle";
+import FollowingSphere from "@/components/Home/FollowingSphere";
+import { useInView, useScroll } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useMotionValueEvent } from "framer-motion";
 export default function Home({ ourPicksArticles, trendingArticles }) {
+  const [spherePosition, setSpherePosition] = useState({ X: 0, Y: 0 });
+  const [sphereText, setSphereText] = useState("");
+  const updateSphereData = ({ newPosition, text }) => {
+    setSpherePosition(newPosition);
+    setSphereText(text);
+  };
   return (
-    <>
+    <div className={styles.pageWrapper}>
       <Navigation animation={true} />
-      <Hero />
-      <div className={styles.ourPicksWrapper}>
-        <h3 className={styles.sectionTitle}>Popular posts</h3>
-        {ourPicksArticles.map((articleSection, index) => {
-          return (
-            <OurPicks
-              key={articleSection.title}
-              articleResultsSection={articleSection}
-              hasBackground={index % 2}
-            />
-          );
-        })}
+      <motion.div
+        initial={{ y: 500, x: 100 }}
+        animate={{ y: spherePosition.Y - 220, x: spherePosition.X }}
+        transition={{ type: "spring", duration: 1, bounce: 0.2 }}
+      >
+        <FollowingSphere text={sphereText} />
+      </motion.div>
+      <div className={styles.scrollHelper}>
+        <Hero />
+        <div className={styles.ourPicksWrapper}>
+          <SectionTitle text="Popular posts" />
+          {/* <h3 className={styles.sectionTitle}>Popular posts</h3> */}
+          {ourPicksArticles.map((articleSection, index) => {
+            return (
+              <OurPicks
+                updateSphereData={updateSphereData}
+                key={articleSection.title}
+                articleResultsSection={articleSection}
+                hasBackground={index % 2}
+              />
+            );
+          })}
+        </div>
+        <TrendingArticles articles={trendingArticles} />
       </div>
-      <TrendingArticles articles={trendingArticles} />
-    </>
+    </div>
   );
 }
 

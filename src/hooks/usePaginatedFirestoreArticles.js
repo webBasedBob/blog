@@ -9,7 +9,7 @@ export const usePaginatedFirestoreArticles = (
     articles: [],
     noMoreResults: false,
   });
-  const getNextBatch = async () => {
+  const getNextBatch = async (firstExecution) => {
     try {
       if (state.noMoreResults) {
         return;
@@ -21,13 +21,23 @@ export const usePaginatedFirestoreArticles = (
       querySnapshot.forEach((doc) => {
         articlesArr.push(doc.data());
       });
-      setState((prev) => {
-        return {
-          ...prev,
-          currentQuery: nextBatchQuery,
-          articles: [...prev.articles, ...articlesArr],
-        };
-      });
+      if (firstExecution) {
+        setState((prev) => {
+          return {
+            ...prev,
+            currentQuery: nextBatchQuery,
+            articles: articlesArr,
+          };
+        });
+      } else {
+        setState((prev) => {
+          return {
+            ...prev,
+            currentQuery: nextBatchQuery,
+            articles: [...prev.articles, ...articlesArr],
+          };
+        });
+      }
     } catch (error) {
       // here i assumed that the code failed because there are no more results to be returned
       setState((prev) => {
