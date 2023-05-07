@@ -1,9 +1,13 @@
+@use "../../styles/config.scss" as config;
 .carousel {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 60%;
+  & button {
+    background-color: config.$color-primary !important;
+  }
 }
 
 .cariuselText {

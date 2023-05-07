@@ -5,21 +5,25 @@
   margin: 1rem;
   transform: translateY(100%);
   background-clip: text;
-  background-color: red;
   color: transparent !important;
   @include config.gradientBottomLeft;
   // @include animation.endless-spin;
   // background-position: ;
-  animation: backgroundppl 1s infinite;
+
   font-size: 50px;
   // height: 10rem;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
 }
-
-@keyframes backgroundppl {
-  from {
-    background-position: top;
-  }
-  to {
-    background-position: bottom;
-  }
-}
+// &::after {
+//   content: "";
+//   position: absolute;
+//   box-shadow: 0 40px 10px 1px config.$color-second-gradient;
+//   height: 10px;
+//   width: 100%;
+//   left: 0;
+//   background-color: transparent;
+//   bottom: 20px;
+// }

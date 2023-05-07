@@ -1,0 +1,111 @@
+@use "../../styles/config.scss" as config;
+.wrapper {
+  position: relative;
+}
+// .background {
+//   @include config.gradientBottomLeft;
+//   position: absolute;
+//   padding: 2px;
+//   border-radius: 1rem;
+//   box-shadow: 0 0px 30px 1px config.$color-blue;
+//   box-shadow: 0 0 50px 1px #48abe0;
+// }
+.button {
+  background-color: config.$color-black;
+  border: none;
+  padding: 5px 2rem;
+  margin: 0;
+  color: config.$color-white;
+  // position: absolute;
+  border-radius: 1rem;
+  font-size: 20px;
+  text-transform: capitalize;
+  color: config.$color-second-gradient;
+  border: config.$color-second-gradient 0.125em solid;
+  font-weight: 400;
+  text-shadow: 0 0 1px config.$color-second-gradient,
+    0 0 0.45em config.$color-second-gradient;
+  box-shadow: inset 0 0 0.5em 0 config.$color-second-gradient,
+    0 0 0.5em 0 config.$color-second-gradient;
+  position: relative;
+  letter-spacing: 2px;
+  opacity: 1;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 120%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+    filter: blur(1.5em);
+    opacity: 0.7;
+    pointer-events: none;
+    background: config.$color-second-gradient;
+    border-radius: 1rem;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 100ms linear;
+    box-shadow: 0 0 2em 1px config.$color-second-gradient;
+    background-color: config.$color-second-gradient;
+    border-radius: 1rem;
+  }
+  &:hover::before,
+  &:focus::before {
+    opacity: 1;
+  }
+
+  &:hover::after,
+  &:focus::after {
+    opacity: 1;
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: config.$color-second-gradient;
+    text-shadow: none;
+    color: config.$color-black;
+  }
+  &.active {
+    animation: animate 0.5s ease-in-out;
+    &::before {
+      animation: scalingShadow 0.5s ease-in-out;
+    }
+  }
+}
+
+@keyframes scalingShadow {
+  0% {
+    top: 120%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  }
+  50% {
+    top: 165%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.75, 0.3);
+  }
+  100% {
+    top: 120%;
+    transform: perspective(1.5em) rotateX(45deg) scale(0.8, 0.3);
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-40%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}

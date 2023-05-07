@@ -7,31 +7,91 @@ import { getArticlesFromEachCategory } from "@/utils/firebaseFn";
 import SectionTitle from "@/components/Home/SectionTitle";
 import FollowingSphere from "@/components/Home/FollowingSphere";
 import { useInView, useScroll } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useMotionValueEvent } from "framer-motion";
+import Newsletter from "@/components/Home/Newsletter";
+import FollowingRectangle from "@/components/Home/FollowingRectangle";
 export default function Home({ ourPicksArticles, trendingArticles }) {
   const [spherePosition, setSpherePosition] = useState({ X: 0, Y: 0 });
-  const [sphereText, setSphereText] = useState("");
-  const updateSphereData = ({ newPosition, text }) => {
+  const [sphereText, setSphereText] = useState("side hustler");
+  const [carouselHeight, setCarouselHeight] = useState(0);
+  const [widthToFill, setWidthToFill] = useState(0);
+  const updateSphereData = ({
+    newPosition,
+    text,
+    carouselHeight,
+    spaceToFillWidth,
+  }) => {
     setSpherePosition(newPosition);
     setSphereText(text);
+    setCarouselHeight(carouselHeight);
+    setWidthToFill(spaceToFillWidth);
   };
+  const rectangleRef = useRef();
+  const [rectangleExtraY, setRectangleExtray] = useState(0);
+  useEffect(() => {
+    setRectangleExtray(rectangleRef.current?.scrollHeight);
+  }, [rectangleRef.current?.scrollHeight]);
+
+  const sphereRef = useRef();
+  const [sphereExtraY, setSphereExtray] = useState(0);
+  useEffect(() => {
+    setSphereExtray(sphereRef.current?.scrollHeight);
+  }, [sphereRef.current?.scrollHeight, sphereText]);
+
+  const lazyLoadVideoHelper = useRef();
+  const shouldLoadVideo = useInView(lazyLoadVideoHelper, { once: true });
+  let viewportWidth;
+  if (typeof window !== "undefined") {
+    viewportWidth = window.innerWidth;
+  }
+  const [isSSR, setIsSSR] = useState(true);
+
+  useEffect(() => {
+    setIsSSR(false);
+  }, []);
+  console.log(spherePosition.Y, sphereExtraY, carouselHeight);
   return (
-    <div className={styles.pageWrapper}>
-      <Navigation animation={true} />
-      <motion.div
-        initial={{ y: 500, x: 100 }}
-        animate={{ y: spherePosition.Y - 220, x: spherePosition.X }}
-        transition={{ type: "spring", duration: 1, bounce: 0.2 }}
-      >
-        <FollowingSphere text={sphereText} />
-      </motion.div>
-      <div className={styles.scrollHelper}>
+    <>
+      {!isSSR && viewportWidth >= 750 ? (
+        <motion.div
+          className={styles.absolutePos}
+          initial={{ y: 500, x: 100 }}
+          animate={{
+            y:
+              spherePosition.Y +
+              carouselHeight / 2 -
+              sphereRef.current?.scrollHeight / 5,
+            x:
+              spherePosition.X +
+              (widthToFill - sphereRef.current?.scrollHeight) / 2,
+          }}
+          transition={{ type: "spring", duration: 1, bounce: 0.2 }}
+        >
+          <FollowingSphere ref={sphereRef} text={sphereText} />
+        </motion.div>
+      ) : (
+        <motion.div
+          className={styles.absolutePos}
+          initial={{ y: 500, x: 0 }}
+          animate={{
+            y:
+              spherePosition.Y +
+              rectangleExtraY / 2 +
+              carouselHeight / 2 -
+              (carouselHeight - rectangleExtraY) / 2,
+          }}
+          transition={{ type: "spring", duration: 0.7, bounce: 0.2 }}
+        >
+          <FollowingRectangle ref={rectangleRef} text={sphereText} />
+        </motion.div>
+      )}
+      <div className={styles.pageWrapper}>
+        <Navigation animation={true} />
         <Hero />
         <div className={styles.ourPicksWrapper}>
           <SectionTitle text="Popular posts" />
-          {/* <h3 className={styles.sectionTitle}>Popular posts</h3> */}
           {ourPicksArticles.map((articleSection, index) => {
             return (
               <OurPicks
@@ -43,9 +103,13 @@ export default function Home({ ourPicksArticles, trendingArticles }) {
             );
           })}
         </div>
-        <TrendingArticles articles={trendingArticles} />
+        <TrendingArticles
+          ref={lazyLoadVideoHelper}
+          articles={trendingArticles}
+        />
+        <Newsletter shouldLoadVideo={shouldLoadVideo} />
       </div>
-    </div>
+    </>
   );
 }
 

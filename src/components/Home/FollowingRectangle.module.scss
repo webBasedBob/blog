@@ -1,0 +1,49 @@
+@use "../../styles/config.scss" as config;
+
+.container {
+  // left: 0;
+  // transform: rotate(-90deg);
+  z-index: 100000;
+  position: relative;
+  font-size: 20px;
+  font-weight: 600;
+  color: config.$color-black;
+  text-align: center;
+  letter-spacing: 2px;
+  display: inline-block;
+  @include config.gradientBottomLeft;
+  justify-content: center;
+  width: 3rem;
+  // padding: 2rem 0;
+  box-shadow: 0 0px 40px -10px #48abe0;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  max-height: 95vh;
+  overflow: hidden;
+  // transform: translateY(100%);
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-transform: capitalize;
+  padding: 0;
+}
+// @media (max-width: 1200px) {
+//   .text {
+//     font-size: 28px;
+//   }
+// }
+
+@media (min-width: 750px) {
+  .container {
+    display: none;
+  }
+}
+@media (max-width: 450px) {
+  .container {
+    font-size: 15px;
+
+    width: 1.5rem;
+  }
+}

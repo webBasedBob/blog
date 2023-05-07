@@ -1,12 +1,19 @@
+@use "./config.scss" as config;
 @import "~bootstrap/scss/bootstrap";
 @import url("https://fonts.googleapis.com/css2?family=Alkatra:wght@400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap");
-
 body {
   font-family: "Roboto", sans-serif !important;
   overflow-x: hidden;
 }
 html {
   // scroll-snap-type: Y proximity;
+}
+.p-carousel-items-container.p-items-hidden > div {
+  // width: config.$article-card-width;
+  // margin: 2rem 1rem 2rem 1rem;
+}
+.p-carousel-item {
+  // width: 250px !important;
 }
 // :root {
 //   --max-width: 1100px;

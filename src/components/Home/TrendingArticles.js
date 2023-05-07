@@ -4,14 +4,15 @@ import Carousel from "react-bootstrap/Carousel";
 import { Button, Container } from "react-bootstrap";
 import Link from "next/link";
 
-const TrendingArticles = ({ articles }) => {
+const TrendingArticles = React.forwardRef(({ articles }, ref) => {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+
   return (
-    <Container fluid className={styles.container}>
+    <Container ref={ref} fluid className={styles.container}>
       <Carousel
         className={styles.carousel}
         activeIndex={index}
@@ -36,6 +37,6 @@ const TrendingArticles = ({ articles }) => {
       </Carousel>
     </Container>
   );
-};
+});
 
 export default TrendingArticles;

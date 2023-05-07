@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Hero.module.scss";
 import PageTitle from "../UI/PageTitle";
 import HeroCarousel from "./HeroCarousel";
+
 const Hero = () => {
   return (
     <div className={styles.container}>

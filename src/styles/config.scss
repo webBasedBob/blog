@@ -14,6 +14,10 @@ $color-second-gradient: #ff43af;
 $color-primary: #ffd700;
 $color-text-nav: $color-primary;
 //  this is the one we use
+
+// sizes
+$article-card-width: 235px;
+
 @mixin gradientBottomLeft {
   background-image: linear-gradient(
     to bottom,

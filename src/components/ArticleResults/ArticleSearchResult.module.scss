@@ -5,8 +5,10 @@ $card-width: 235px;
   text-decoration: none;
   font-size: 1rem;
   color: config.$color-black;
-  max-width: $card-width;
+  // max-width: $card-width;
   margin: 2rem 1rem 2rem 1rem;
+  width: auto !important;
+  // display: inline-block;
 }
 .card {
   cursor: pointer;

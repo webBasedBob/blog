@@ -1,9 +1,7 @@
 @use "../../styles/config.scss" as config;
 .sphere {
-  top: calc(50% - 150px);
-  left: calc(50% - 150px);
-  width: 300px;
-  height: 300px;
+  width: 270px;
+  height: 270px;
   border-radius: 50%;
   box-shadow: inset 0 0 50px #fff,
     inset 20px 0 80px config.$color-second-gradient,
@@ -12,4 +10,11 @@
     inset -20px 0 300px config.$color-primary, 0 0 50px #fff,
     -10px 0 80px config.$color-second-gradient,
     10px 0 80px config.$color-primary;
+}
+
+@media (max-width: 1200px) {
+  .sphere {
+    width: 250px;
+    height: 250px;
+  }
 }

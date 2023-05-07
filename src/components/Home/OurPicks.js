@@ -13,9 +13,10 @@ const OurPicks = ({
   updateSphereData,
 }) => {
   const responsiveOptions = [
-    { breakpoint: "600px", numScroll: 1, numVisible: 1 },
-    { breakpoint: "850px", numScroll: 1, numVisible: 2 },
-    { breakpoint: "1200px", numScroll: 1, numVisible: 3 },
+    { breakpoint: "730px", numScroll: 1, numVisible: 1 },
+    { breakpoint: "1024px", numScroll: 1, numVisible: 1 },
+    { breakpoint: "1300px", numScroll: 1, numVisible: 2 },
+    { breakpoint: "1600px", numScroll: 1, numVisible: 3 },
     { breakpoint: "5000px", numScroll: 1, numVisible: 4 },
   ];
   const wrapperClass = `${styles.wrapper} ${
@@ -27,25 +28,33 @@ const OurPicks = ({
     if (!isInView || !window) {
       return;
     }
-    const newPosition = { X: ref.current.offsetLeft, Y: ref.current.offsetTop };
+    const newPosition = {
+      X: ref.current.offsetLeft,
+      Y: ref.current.offsetTop + ref.current.parentElement.scrollHeight / 2,
+    };
     updateSphereData({
       newPosition: newPosition,
       text: articleResultsSection.title,
+      carouselHeight: ref.current.parentElement.scrollHeight,
+      spaceToFillWidth: ref.current.scrollWidth,
     });
   }, [isInView]);
   return (
     <div className={wrapperClass}>
       <div ref={ref} className={styles.sectionTitle}></div>
-      <div className={styles.carouselWrapper}>
-        <Carousel
-          responsiveOptions={responsiveOptions}
-          circular
-          value={articleResultsSection.articles}
-          numScroll={1}
-          numVisible={2}
-          itemTemplate={ArticleSearchResult}
-          className={styles.carousel}
-        />
+      <div className={styles.helperWrapper}>
+        <div className={styles.carouselWrapper}>
+          <Carousel
+            contentClassName={styles.content}
+            responsiveOptions={responsiveOptions}
+            circular
+            value={articleResultsSection.articles}
+            numScroll={1}
+            numVisible={2}
+            itemTemplate={ArticleSearchResult}
+            className={styles.carousel}
+          />
+        </div>
       </div>
     </div>
   );
