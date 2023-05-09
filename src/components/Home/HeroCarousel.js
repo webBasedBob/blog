@@ -21,15 +21,15 @@ const HeroCarousel = () => {
   const data = [
     {
       title: "Entrepreneur Hustler",
-      text: "We provide valuable insights and advice on a range of topics, including startup advice, marketing, finance, and more. Whether you're a seasoned entrepreneur or just starting out, our blog has something for everyone.",
+      text: "Section dedicated to present or future entrepreneurs. Here you find valuable insights on a range of topics: startups, marketing, finance, business ideas.",
     },
     {
       title: "Side Hustler",
-      text: "We are a go-to resource side hustle ideas and insights. Start exploring our blog today and learn how to increase your financial stability through side hustles.",
+      text: "Section dedicated to hustlers that want to make some extra cash. Here you find valuable insights on a range of topics: side hustle ideas, success tactics, tips, tricks and hacks.",
     },
     {
-      title: "Employed Hustler",
-      text: "Employed hustlers, we did not forget you. Our content is designed to help you improve your skills and build the confidence you need to take on new challenges in the workplace.",
+      title: "Corporate Hustler",
+      text: "Section dedicated to those that want to climb the corporate ladder. Here you find valuable insights on a range of topics: productivity, office politics, negociation",
     },
   ];
   return (

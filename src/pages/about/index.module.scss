@@ -1,0 +1,122 @@
+@use "../../styles/config.scss" as config;
+
+.container {
+  max-width: 1200px;
+  max-height: 50vh;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  border-radius: 1rem;
+  // position: absolute;
+  top: 50%;
+  right: 50%;
+  // transform: translate(50%, -50%);
+  gap: 3rem;
+  margin-top: 10rem;
+  padding: 0 3rem;
+}
+.text {
+  & h1 {
+    text-transform: capitalize;
+    position: relative;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+  & p {
+    font-size: 1.2rem;
+  }
+  & span {
+    width: 2rem;
+    display: inline-block;
+  }
+}
+.image {
+  border-radius: 1rem;
+  position: relative;
+  z-index: 10;
+  height: 80%;
+  align-self: center;
+  min-width: 30rem;
+  & img {
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    transform: skew(1deg, -10deg);
+  }
+  &::before,
+  &::after {
+    border-radius: 1rem;
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.6;
+  }
+  &::before {
+    background-color: config.$color-primary;
+    z-index: -1;
+    transform: skew(-10deg, -25deg);
+  }
+  &::after {
+    background-color: config.$color-second-gradient;
+    z-index: -1;
+    transform: skew(10deg, 10deg);
+  }
+}
+
+@media (max-width: 1000px) {
+  .container {
+    flex-direction: column-reverse;
+    max-height: 500vh;
+    height: auto;
+  }
+  .image {
+    width: 70%;
+    margin-bottom: 3rem;
+  }
+  .text {
+    margin-bottom: 5rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    max-width: 100vw;
+    padding: 1rem;
+    margin: 0;
+    margin-top: 5rem;
+  }
+  .image {
+    transform: skew(0deg, 0deg);
+    width: 100%;
+    min-width: 0px;
+    &::before,
+    &::after {
+      display: none;
+    }
+    & img {
+      transform: skew(0deg, 0deg);
+      width: 100%;
+      max-width: 100vw;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .text {
+    padding: 0rem;
+  }
+}
+
+// @media (max-width: 550px) {
+//   .container {
+//   }
+//   .image {
+//   }
+//   .text {
+//     padding: 0rem;
+//   }
+// }

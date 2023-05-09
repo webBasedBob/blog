@@ -11,7 +11,7 @@ export default function MetaData() {
   const articleLabels = [
     { label: "Entrepreneur Hustler" },
     { label: "Side Hustler" },
-    { label: "Employed Hustler" },
+    { label: "Corporate Hustler" },
   ];
   const [label, setLabel] = useState();
 

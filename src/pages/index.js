@@ -6,40 +6,44 @@ import OurPicks from "@/components/Home/OurPicks";
 import { getArticlesFromEachCategory } from "@/utils/firebaseFn";
 import SectionTitle from "@/components/Home/SectionTitle";
 import FollowingSphere from "@/components/Home/FollowingSphere";
-import { useInView, useScroll } from "framer-motion";
+import { animations, useInView, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useMotionValueEvent } from "framer-motion";
 import Newsletter from "@/components/Home/Newsletter";
 import FollowingRectangle from "@/components/Home/FollowingRectangle";
 export default function Home({ ourPicksArticles, trendingArticles }) {
-  const [spherePosition, setSpherePosition] = useState({ X: 0, Y: 0 });
-  const [sphereText, setSphereText] = useState("side hustler");
-  const [carouselHeight, setCarouselHeight] = useState(0);
-  const [widthToFill, setWidthToFill] = useState(0);
-  const updateSphereData = ({
-    newPosition,
-    text,
-    carouselHeight,
-    spaceToFillWidth,
-  }) => {
-    setSpherePosition(newPosition);
-    setSphereText(text);
-    setCarouselHeight(carouselHeight);
-    setWidthToFill(spaceToFillWidth);
+  const [animationState, setAnimationState] = useState({
+    X: 0,
+    Y: 0,
+    text: "side hustler",
+    carouselHeight: 0,
+    widthToFill: 0,
+  });
+  const [tempAnimationState, setTempAnimationState] = useState({
+    X: 0,
+    Y: 0,
+    text: "side hustler",
+    carouselHeight: 0,
+    widthToFill: 0,
+  });
+  const pulaRef = useRef();
+  const isPulaInView = useInView(pulaRef);
+  const [animationEnded, setAnimationEnded] = useState(true);
+  const updateSphereData = (data) => {
+    if (!animationState.Y) {
+      setAnimationState(data);
+    }
+    setTempAnimationState(data);
   };
+  console.log(isPulaInView);
+  useEffect(() => {
+    if (animationEnded && isPulaInView) {
+      setAnimationState(tempAnimationState);
+    }
+  }, [animationEnded, setAnimationState, tempAnimationState]);
   const rectangleRef = useRef();
-  const [rectangleExtraY, setRectangleExtray] = useState(0);
-  useEffect(() => {
-    setRectangleExtray(rectangleRef.current?.scrollHeight);
-  }, [rectangleRef.current?.scrollHeight]);
-
   const sphereRef = useRef();
-  const [sphereExtraY, setSphereExtray] = useState(0);
-  useEffect(() => {
-    setSphereExtray(sphereRef.current?.scrollHeight);
-  }, [sphereRef.current?.scrollHeight, sphereText]);
-
   const lazyLoadVideoHelper = useRef();
   const shouldLoadVideo = useInView(lazyLoadVideoHelper, { once: true });
   let viewportWidth;
@@ -47,44 +51,93 @@ export default function Home({ ourPicksArticles, trendingArticles }) {
     viewportWidth = window.innerWidth;
   }
   const [isSSR, setIsSSR] = useState(true);
-
   useEffect(() => {
     setIsSSR(false);
   }, []);
-  console.log(spherePosition.Y, sphereExtraY, carouselHeight);
   return (
     <>
+      <div
+        style={{
+          opacity: 0,
+          height: sphereRef.current?.scrollHeight
+            ? sphereRef.current?.scrollHeight
+            : rectangleRef.current?.scrollHeight + 20,
+          width: sphereRef.current?.scrollWidth
+            ? sphereRef.current?.scrollWidth
+            : rectangleRef.current?.scrollWidth + 20,
+          position: "absolute",
+          top:
+            tempAnimationState.Y +
+            tempAnimationState.carouselHeight / 2 -
+            (sphereRef.current?.scrollHeight
+              ? sphereRef.current?.scrollHeight
+              : rectangleRef.current?.scrollHeight) /
+              10,
+          backgroundColor: "red",
+        }}
+        ref={pulaRef}
+      ></div>
       {!isSSR && viewportWidth >= 750 ? (
         <motion.div
+          key={"sphere"}
           className={styles.absolutePos}
-          initial={{ y: 500, x: 100 }}
+          initial={{ y: null, x: null, opacity: 0 }}
+          onAnimationStart={() => {
+            setAnimationEnded(false);
+          }}
+          onAnimationComplete={() => {
+            setAnimationEnded(true);
+            if (isPulaInView) {
+              setAnimationState(tempAnimationState);
+            }
+          }}
           animate={{
             y:
-              spherePosition.Y +
-              carouselHeight / 2 -
+              animationState.Y +
+              animationState.carouselHeight / 2 -
               sphereRef.current?.scrollHeight / 5,
             x:
-              spherePosition.X +
-              (widthToFill - sphereRef.current?.scrollHeight) / 2,
+              animationState.X +
+              (animationState.widthToFill - sphereRef.current?.scrollHeight) /
+                2,
+            opacity: animationState.Y ? 1 : 0,
           }}
           transition={{ type: "spring", duration: 1, bounce: 0.2 }}
         >
-          <FollowingSphere ref={sphereRef} text={sphereText} />
+          <FollowingSphere ref={sphereRef} text={animationState.text} />
         </motion.div>
       ) : (
         <motion.div
+          key={"rectangle"}
           className={styles.absolutePos}
-          initial={{ y: 500, x: 0 }}
+          initial={{ y: null, x: null, opacity: 0 }}
+          onAnimationStart={() => {
+            setAnimationEnded(false);
+          }}
+          onAnimationComplete={() => {
+            setAnimationEnded(true);
+            setAnimationState(tempAnimationState);
+          }}
+          // animate={{
+          //   y:
+          //     animationState.Y +
+          //     rectangleRef.current?.scrollHeight / 2 +
+          //     animationState.carouselHeight / 2 -
+          //     (animationState.carouselHeight -
+          //       rectangleRef.current?.scrollHeight) /
+          //       2,
+          //   opacity: animationState.Y ? 1 : 0,
+          // }}
           animate={{
             y:
-              spherePosition.Y +
-              rectangleExtraY / 2 +
-              carouselHeight / 2 -
-              (carouselHeight - rectangleExtraY) / 2,
+              animationState.Y +
+              animationState.carouselHeight / 2 -
+              animationState.carouselHeight / 10,
+            opacity: animationState.Y ? 1 : 0,
           }}
-          transition={{ type: "spring", duration: 0.7, bounce: 0.2 }}
+          transition={{ type: "spring", duration: 1, bounce: 0.2 }}
         >
-          <FollowingRectangle ref={rectangleRef} text={sphereText} />
+          <FollowingRectangle ref={rectangleRef} text={animationState.text} />
         </motion.div>
       )}
       <div className={styles.pageWrapper}>
@@ -103,6 +156,7 @@ export default function Home({ ourPicksArticles, trendingArticles }) {
             );
           })}
         </div>
+        <SectionTitle text="our picks" />
         <TrendingArticles
           ref={lazyLoadVideoHelper}
           articles={trendingArticles}

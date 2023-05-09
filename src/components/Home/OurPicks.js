@@ -28,15 +28,12 @@ const OurPicks = ({
     if (!isInView || !window) {
       return;
     }
-    const newPosition = {
+    updateSphereData({
       X: ref.current.offsetLeft,
       Y: ref.current.offsetTop + ref.current.parentElement.scrollHeight / 2,
-    };
-    updateSphereData({
-      newPosition: newPosition,
       text: articleResultsSection.title,
       carouselHeight: ref.current.parentElement.scrollHeight,
-      spaceToFillWidth: ref.current.scrollWidth,
+      widthToFill: ref.current.scrollWidth,
     });
   }, [isInView]);
   return (

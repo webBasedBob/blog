@@ -41,12 +41,12 @@
   width: 100%;
   margin: 0 auto;
   background-color: config.$color-black;
-
   & img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     opacity: 0.5;
+    object-position: center;
   }
 }
 .text {
@@ -85,6 +85,7 @@
   background-color: config.$color-black;
   margin: 0;
   scroll-snap-align: end;
+  margin-top: 8rem;
 }
 
 @media (max-width: 750px) {

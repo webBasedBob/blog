@@ -20,8 +20,8 @@ const LinksToArticles = ({ offcanvas }) => {
         </Link>
       </button>
       <button className={styles.navItem} type="button">
-        <Link className={styles.navLink} href="/articles/employed">
-          employed hustler
+        <Link className={styles.navLink} href="/articles/corporate">
+          corporate hustler
         </Link>
       </button>
     </div>

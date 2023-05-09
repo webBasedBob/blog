@@ -174,7 +174,7 @@ export async function getArticlesFromEachCategory(numArticles) {
   const articlesRef = collection(db, "articles");
   const categories = [
     "Side Hustler",
-    "Employed Hustler",
+    "Corporate Hustler",
     "Entrepreneur Hustler",
   ];
   const result = [];

@@ -14,6 +14,7 @@ import {
 } from "@/utils/firebaseFn";
 import { useEffect, useState } from "react";
 import Title from "./Title";
+import styles from "./Article.module.scss";
 export default function Article({ article }) {
   const [articleJSX, setArticleJSX] = useState();
 
@@ -35,6 +36,7 @@ export default function Article({ article }) {
       "image-regular": "",
       "text-section": (
         <div
+          className={styles.textSection}
           key={`${articleSectionData.sectionName}-${articleSectionData.order}`}
           dangerouslySetInnerHTML={{
             __html: articleSectionData?.data?.content,

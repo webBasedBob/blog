@@ -46,7 +46,6 @@ const FollowingRectangle = React.forwardRef(({ text }, ref) => {
   }
   return (
     <div ref={ref} className={styles.container}>
-      {/* <p className={styles.text}>{text}</p> */}
       <div className={styles.text}>{textJsx}</div>
     </div>
   );

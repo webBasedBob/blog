@@ -5,10 +5,8 @@ $card-width: 235px;
   text-decoration: none;
   font-size: 1rem;
   color: config.$color-black;
-  // max-width: $card-width;
   margin: 2rem 1rem 2rem 1rem;
   width: auto !important;
-  // display: inline-block;
 }
 .card {
   cursor: pointer;
@@ -17,15 +15,6 @@ $card-width: 235px;
   margin: 1rem;
   background-color: transparent;
   margin: 0 auto;
-  &:hover {
-    .image {
-      backface-visibility: hidden;
-      & img {
-        backface-visibility: hidden;
-        transform: scale(1.2) translate(10px, -10px);
-      }
-    }
-  }
 }
 .row {
   gap: 1rem;
@@ -42,30 +31,8 @@ $card-width: 235px;
     transition: all 0.5s;
   }
 }
-.animate {
-  &::after {
-    content: "";
-    height: 110%;
-    width: 110%;
-    position: absolute;
-    background-color: #fff;
-    left: -10px;
-    top: 0%;
-    border-left: solid 4px #999;
-    transform: translateX(105%);
-    animation: slide-right 1s;
-  }
-}
-@keyframes slide-right {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(105%);
-  }
-}
+
 .body {
-  // padding: 5px 30px;
   padding: 0;
   margin: 0;
 
@@ -77,9 +44,6 @@ $card-width: 235px;
   font-weight: 800;
   padding: 0;
   margin: 0;
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 @media (max-width: 550px) {
@@ -97,4 +61,23 @@ $card-width: 235px;
   background-color: config.$color-gold;
   white-space: nowrap;
   color: config.$color-black;
+}
+
+@media (hover: hover) {
+  .card {
+    &:hover {
+      .image {
+        backface-visibility: hidden;
+        & img {
+          backface-visibility: hidden;
+          transform: scale(1.2) translate(10px, -10px);
+        }
+      }
+    }
+  }
+  .title {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

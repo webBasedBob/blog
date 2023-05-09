@@ -11,16 +11,6 @@
   padding: 1rem;
   align-items: center;
   transition: all 0.5s;
-  &:hover {
-    background-color: config.$color-light-gray;
-    .image {
-      backface-visibility: hidden;
-      & img {
-        backface-visibility: hidden;
-        filter: grayscale(0);
-      }
-    }
-  }
 }
 .link,
 .link:hover {
@@ -34,7 +24,6 @@
   border-radius: 50%;
   flex-shrink: 0;
   & img {
-    filter: grayscale(1);
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -48,13 +37,35 @@
   text-transform: capitalize;
   font-size: 20px;
   font-weight: 800;
-  &:hover {
-    text-decoration: underline;
-  }
 }
 @media (max-width: 550px) {
   .image {
     height: 100px;
     width: 100px;
+  }
+}
+
+@media (hover: hover) {
+  .image {
+    & img {
+      filter: grayscale(1);
+    }
+  }
+  .card {
+    &:hover {
+      background-color: config.$color-light-gray;
+      .image {
+        backface-visibility: hidden;
+        & img {
+          backface-visibility: hidden;
+          filter: grayscale(0);
+        }
+      }
+    }
+  }
+  .title {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

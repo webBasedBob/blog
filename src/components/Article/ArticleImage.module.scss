@@ -1,7 +1,8 @@
 .heroImage {
   width: 100%;
   overflow: hidden;
-  max-height: 30rem;
+  max-height: 80vh;
+  height: auto;
   & img {
     width: 100%;
     height: 100%;

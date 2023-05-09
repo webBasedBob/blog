@@ -1,0 +1,11 @@
+@use "../../styles/config.scss" as config;
+.textSection {
+  color: config.$color-black;
+  & h2 {
+    padding: 1rem 0;
+    letter-spacing: 1px;
+  }
+  & ul li {
+    margin: 1rem 0;
+  }
+}
