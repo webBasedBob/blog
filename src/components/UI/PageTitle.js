@@ -1,4 +1,3 @@
-import EnterFromSides from "../Animations/EnterFromSides";
 import classes from "./PageTitle.module.scss";
 import { motion } from "framer-motion";
 export default function PageTitle({ children, className }) {

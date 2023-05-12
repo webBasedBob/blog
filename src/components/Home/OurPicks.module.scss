@@ -7,7 +7,7 @@
   align-items: center;
 }
 .helperWrapper {
-  width: calc(100% - 400px);
+  width: calc(100% - 300px);
   background-color: config.$color-white;
   border-radius: 1rem;
   padding: 4rem 0;
@@ -33,12 +33,12 @@
 
 @media (max-width: 1200px) {
   .helperWrapper {
-    width: calc(100% - 350px);
+    width: calc(100% - 300px);
   }
 }
 @media (max-width: 800px) {
   .helperWrapper {
-    width: calc(100% - 310px);
+    width: calc(100% - 300px);
   }
 }
 @media (max-width: 750px) {

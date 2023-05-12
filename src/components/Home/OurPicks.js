@@ -7,18 +7,18 @@ import { Carousel } from "primereact/carousel";
 import styles from "./OurPicks.module.scss";
 import PageWrapper from "../UI/PageWrapper";
 import { useInView } from "framer-motion";
-const OurPicks = ({
-  articleResultsSection,
-  hasBackground,
-  updateSphereData,
-}) => {
+import { useDispatch, useSelector } from "react-redux";
+import { animationActions } from "@/store/home-animation";
+const OurPicks = ({ articleResultsSection, hasBackground }) => {
   const responsiveOptions = [
     { breakpoint: "730px", numScroll: 1, numVisible: 1 },
     { breakpoint: "1024px", numScroll: 1, numVisible: 1 },
     { breakpoint: "1300px", numScroll: 1, numVisible: 2 },
     { breakpoint: "1600px", numScroll: 1, numVisible: 3 },
-    { breakpoint: "5000px", numScroll: 1, numVisible: 4 },
+    { breakpoint: "5000px", numScroll: 1, numVisible: 3 },
   ];
+  const presentState = useSelector((state) => state.homeAnimation.presentState);
+  const dispatch = useDispatch();
   const wrapperClass = `${styles.wrapper} ${
     hasBackground ? styles.background : ""
   }`;
@@ -28,13 +28,17 @@ const OurPicks = ({
     if (!isInView || !window) {
       return;
     }
-    updateSphereData({
+    const data = {
       X: ref.current.offsetLeft,
       Y: ref.current.offsetTop + ref.current.parentElement.scrollHeight / 2,
       text: articleResultsSection.title,
       carouselHeight: ref.current.parentElement.scrollHeight,
       widthToFill: ref.current.scrollWidth,
-    });
+    };
+    if (!presentState.Y) {
+      dispatch(animationActions.setPresentState(data));
+    }
+    dispatch(animationActions.setNextState(data));
   }, [isInView]);
   return (
     <div className={wrapperClass}>
