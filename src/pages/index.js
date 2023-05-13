@@ -9,11 +9,25 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Newsletter from "@/components/Home/Newsletter";
 import Animation from "@/components/Home/Animation";
+import { SEO } from "../config/constants";
+import { useRouter } from "next/router";
+import SEOHeader from "@/components/SEO/SEOHeader";
 export default function Home({ ourPicksArticles, trendingArticles }) {
+  const { asPath } = useRouter();
+  const fullUrl = `https://hustlinginsights.com${asPath}`;
   const lazyLoadVideoHelper = useRef();
   const shouldLoadVideo = useInView(lazyLoadVideoHelper, { once: true });
   return (
     <>
+      {" "}
+      <SEOHeader
+        title={SEO.title}
+        description={SEO.description}
+        fullUrl={fullUrl}
+        image={SEO.image}
+        caption={SEO.caption}
+        linkType="website"
+      />
       <Animation />
       <div className={styles.pageWrapper}>
         <Navigation animation={true} />

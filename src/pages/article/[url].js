@@ -1,20 +1,14 @@
 import Navigation from "@/components/Layout/Navigation/Navigation";
 import Article from "@/components/Article/Article";
-import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import SuggestedArticles from "@/components/SuggestedArticles/SuggestedArticles";
-import styles from "./index.module.scss";
-import Head from "next/head";
 import PageWrapper from "@/components/UI/PageWrapper";
-import { useRouter } from "next/router";
 import {
   getArticle,
   getFirestoreArticles,
   getFirestoreRelatedArticles,
-  setFirestoreDoc,
 } from "@/utils/firebaseFn";
-import { useEffect, useInsertionEffect, useState } from "react";
+import SEOHeader from "@/components/SEO/SEOHeader";
 export default function ArticlePage({ article, suggestedArticles }) {
   const articleContent = Object.values(article.content);
   const title = articleContent.find((elm) => elm.sectionName === "title").data
@@ -25,7 +19,6 @@ export default function ArticlePage({ article, suggestedArticles }) {
   const image = articleContent.find(
     (elm) => elm.sectionName === "image-main"
   ).data;
-  const mainImageCaption = image?.caption || "";
   const richGoogleResultData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -43,46 +36,15 @@ export default function ArticlePage({ article, suggestedArticles }) {
   };
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        {/* open graph protocol headers - minimum required tags */}
-        <meta property="og:title" content={title} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={article.fullUrl} />
-        <meta property="og:image" content={image.image} />
-        {/* additional/optional tags */}
-        <meta property="og:description" content={description} />
-        <meta property="og:site_name" content="HustlingInsights.com" />
-        <meta property="og:image:alt" content={image.caption} />
-        {/* twitter tags */}
-        <meta
-          property="twitter:description"
-          content={
-            description?.length < 200 ? description : description.slice(0, 195)
-          }
-        />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:image" content={image.image} />
-        <meta
-          property="twitter:image:alt"
-          content={
-            mainImageCaption.length < 420
-              ? mainImageCaption
-              : mainImageCaption.slice(0, 400)
-          }
-        />
-        <meta property="twitter:card" content="article" />
-        <meta property="" content="" />
-        {/* rich google result - blog posting */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(richGoogleResultData),
-          }}
-          key="product-jsonld"
-        />
-      </Head>
+      <SEOHeader
+        title={title}
+        description={description}
+        fullUrl={article.fullUrl}
+        image={image.image}
+        caption={image.caption}
+        linkType="article"
+        richGoogleResultData={richGoogleResultData}
+      />
       <Navigation />
       <PageWrapper>
         <Row>

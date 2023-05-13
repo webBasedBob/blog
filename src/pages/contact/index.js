@@ -3,9 +3,23 @@ import Link from "next/link";
 import React from "react";
 import styles from "./index.module.scss";
 import image from "../../assets/contact-us.webp";
+import { SEO } from "../../config/constants";
+import SEOHeader from "@/components/SEO/SEOHeader";
+
+import { useRouter } from "next/router";
 const index = () => {
+  const { asPath } = useRouter();
+  const fullUrl = `https://hustlinginsights.com${asPath}`;
   return (
     <>
+      <SEOHeader
+        title={SEO.title}
+        description={SEO.description}
+        fullUrl={fullUrl}
+        image={SEO.image}
+        caption={SEO.caption}
+        linkType="website"
+      />
       <Navigation />
       <div className={styles.cardBackground}>
         <div className={styles.card}>

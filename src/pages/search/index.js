@@ -20,7 +20,13 @@ import { searchActions } from "@/store/search";
 import { usePaginatedSearchresults } from "@/hooks/UsePaginatedSearchResults";
 import PageWrapper from "@/components/UI/PageWrapper";
 import styles from "./index.module.scss";
+import { SEO } from "../../config/constants";
+import { useRouter } from "next/router";
+import SEOHeader from "@/components/SEO/SEOHeader";
+
 const index = () => {
+  const { asPath } = useRouter();
+  const fullUrl = `https://hustlinginsights.com${asPath}`;
   const [noMoreResults, setNoMoreResults] = useState(false);
   const searchInput = useSelector((state) => state.search.searchInput);
   const mustPerformSearch = useSelector(
@@ -101,6 +107,14 @@ const index = () => {
   };
   return (
     <>
+      <SEOHeader
+        title={SEO.title}
+        description={SEO.description}
+        fullUrl={fullUrl}
+        image={SEO.image}
+        caption={SEO.caption}
+        linkType="website"
+      />
       <Navigation />
       <PageWrapper className={styles.wrapper}>
         <SearchPanel />

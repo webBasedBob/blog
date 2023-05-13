@@ -15,6 +15,9 @@ import PageTitle from "./PageTitle";
 import ArticleCardResults from "@/components/ArticleResults/ArticleCardResults";
 import PageWrapper from "../UI/PageWrapper";
 import styles from "./ArticlesPage.module.scss";
+import SEOHeader from "@/components/SEO/SEOHeader";
+import { SEO } from "../../config/constants";
+import { useRouter } from "next/router";
 const ArticlesPage = ({ page }) => {
   const getQueryGetters = () => {
     const app = initializeApp(firebaseConfig);
@@ -45,8 +48,18 @@ const ArticlesPage = ({ page }) => {
   useEffect(() => {
     getNextBatch(true);
   }, []);
+  const { asPath } = useRouter();
+  const fullUrl = `https://hustlinginsights.com${asPath}`;
   return (
     <>
+      <SEOHeader
+        title={SEO.title}
+        description={SEO.description}
+        fullUrl={fullUrl}
+        image={SEO.image}
+        caption={SEO.caption}
+        linkType="website"
+      />
       <Navigation />
       <PageTitle>{page} Articles</PageTitle>
       <PageWrapper>
