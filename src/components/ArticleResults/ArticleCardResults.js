@@ -3,11 +3,7 @@ import styles from "./ArticleCardResults.module.scss";
 import { Container, Row } from "react-bootstrap";
 import { Button } from "primereact/button";
 import ArticleSearchResult from "./ArticleSearchResult";
-import {
-  dateObjToStr,
-  transformSearchInputString,
-  transormDataForArticleCard,
-} from "@/utils/helperFn";
+import { dateObjToStr, transormDataForArticleCard } from "@/utils/helperFn";
 import PageWrapper from "../UI/PageWrapper";
 const ArticleCardResults = ({
   articles,

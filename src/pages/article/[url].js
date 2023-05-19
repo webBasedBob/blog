@@ -9,6 +9,7 @@ import {
   getFirestoreRelatedArticles,
 } from "@/utils/firebaseFn";
 import SEOHeader from "@/components/SEO/SEOHeader";
+
 export default function ArticlePage({ article, suggestedArticles }) {
   const articleContent = Object.values(article.content);
   const title = articleContent.find((elm) => elm.sectionName === "title").data
@@ -19,6 +20,7 @@ export default function ArticlePage({ article, suggestedArticles }) {
   const image = articleContent.find(
     (elm) => elm.sectionName === "image-main"
   ).data;
+
   const richGoogleResultData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -34,6 +36,7 @@ export default function ArticlePage({ article, suggestedArticles }) {
       },
     ],
   };
+
   return (
     <>
       <SEOHeader
@@ -57,9 +60,11 @@ export default function ArticlePage({ article, suggestedArticles }) {
     </>
   );
 }
+
 import fs from "fs";
 import { EOL } from "os";
 import { dateObjToSeoStr } from "@/utils/helperFn";
+
 export async function getStaticPaths() {
   //this creates the sitemap file with default links
   const constantLinks = [

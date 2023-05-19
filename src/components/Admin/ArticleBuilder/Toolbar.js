@@ -2,30 +2,14 @@ import React, { useRef } from "react";
 import styles from "./Toolbar.module.scss";
 import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
-import { InputText } from "primereact/inputtext";
-import ArticleTitleInput from "./TitleInput";
-import ArticleMainImageInput from "./ImageUpload";
-import TextSection from "./TextSection";
 import { Toolbar } from "primereact/toolbar";
 import Container from "react-bootstrap/Container";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { errorActions } from "@/store/error";
-import {
-  getImgUrl,
-  getLiveDatabase,
-  setFirestoreData,
-  setFirestoreDoc,
-  storeImage,
-  storeLiveDatabase,
-} from "@/utils/firebaseFn";
-import { images } from "../../../../next.config";
-import {
-  canUploadData,
-  clearTitle,
-  getFileFromBase64,
-  prepareArticleDataForUpload,
-} from "@/utils/helperFn";
+import { setFirestoreDoc } from "@/utils/firebaseFn";
+import { canUploadData, prepareArticleDataForUpload } from "@/utils/helperFn";
+
 const ArticleBuilderToolbar = ({ handleAddSection }) => {
   const dispatch = useDispatch();
   const addSectionRef = useRef();

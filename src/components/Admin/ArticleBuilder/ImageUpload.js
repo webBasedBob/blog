@@ -1,14 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Toast } from "primereact/toast";
 import { FileUpload } from "primereact/fileupload";
-import { ProgressBar } from "primereact/progressbar";
-import { Button } from "primereact/button";
 import { Tooltip } from "primereact/tooltip";
-import { Tag } from "primereact/tag";
 import { Container } from "react-bootstrap";
 import styles from "./ImageUpload.module.scss";
 import { InputTextarea } from "primereact/inputtextarea";
-import { debounce, getBase64, getFileFromBase64 } from "@/utils/helperFn";
+import { getBase64 } from "@/utils/helperFn";
 import { useDispatch, useSelector } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
 export default function ArticleMainImageInput({ type = "regular", id }) {

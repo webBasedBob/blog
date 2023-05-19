@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./TitleInput.module.scss";
 import { Container } from "react-bootstrap";
 import { InputText } from "primereact/inputtext";
-import { debounce } from "@/utils/helperFn";
 import { useDispatch, useSelector } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
 const ArticleTitleInput = ({ id }) => {

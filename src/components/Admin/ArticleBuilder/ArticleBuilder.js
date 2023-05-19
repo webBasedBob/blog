@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import styles from "./ArticleBuilder.module.scss";
 import Toolbar from "./Toolbar";
 import { Container } from "react-bootstrap";
@@ -64,13 +64,3 @@ const BlogPostEditor = () => {
 };
 
 export default BlogPostEditor;
-
-// export default function TemplateDemo() {
-//     const [text, setText] = useState('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');
-
-//     return (
-//         <div className="card">
-//             <Editor value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} style={{ height: '320px' }} />
-//         </div>
-//     )
-// }

@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Editor } from "primereact/editor";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
 const TextSection = ({ id }) => {
   const [text, setText] = useState("");

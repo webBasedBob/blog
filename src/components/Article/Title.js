@@ -1,4 +1,3 @@
-import { resolve } from "styled-jsx/css";
 import classes from "./Title.module.scss";
 import SharePanel from "./SharePanel";
 export default function Title({ children, className }) {

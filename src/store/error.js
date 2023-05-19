@@ -1,9 +1,4 @@
-import {
-  createSlice,
-  createReducer,
-  configureStore,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const errorStore = createSlice({
   name: "error",
@@ -12,6 +7,7 @@ export const errorStore = createSlice({
     setError(state, action) {
       state.errorMessage = action.payload;
     },
+
     resetState(state, action) {
       state.errorMessage = "";
     },

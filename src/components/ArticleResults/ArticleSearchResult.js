@@ -1,9 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import styles from "./ArticleSearchResult.module.scss";
 import Card from "react-bootstrap/Card";
 import Link from "next/link";
-import { dateObjToStr } from "@/utils/helperFn";
-import { useInView } from "framer-motion";
 const ArticleSearchResult = ({ image, title, date, label, url }) => {
   return (
     <Link href={`/article/${url}`} className={styles.link}>

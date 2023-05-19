@@ -4,13 +4,12 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Icon from "@/components/UI/Icon";
-import { SearchIcon, Menu } from "@/assets/icons";
+import { Menu } from "@/assets/icons";
 import Nav from "react-bootstrap/Nav";
 import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import Link from "next/link";
 import logo from "../../../assets/logo.png";
-import { motion } from "framer-motion";
 const NavigationBar = ({ handleShowOffcanvas, navItemsData, animation }) => {
   const [expandedNavItem, setExpandedNavItem] = useState({
     isVisible: false,

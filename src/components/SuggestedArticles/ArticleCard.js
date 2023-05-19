@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./ArticleCard.module.scss";
 import Card from "react-bootstrap/Card";
-import Image from "react-bootstrap/Image";
-import Row from "react-bootstrap/Row";
 import Link from "next/link";
 const SuggestedArticle = ({ image, title, text, url }) => {
   return (

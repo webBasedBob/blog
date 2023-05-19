@@ -1,11 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ArticleSearchResult from "../ArticleResults/ArticleSearchResult";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
 import { Carousel } from "primereact/carousel";
 import styles from "./OurPicks.module.scss";
-import PageWrapper from "../UI/PageWrapper";
 import { useInView } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { animationActions } from "@/store/home-animation";

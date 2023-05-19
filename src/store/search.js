@@ -12,10 +12,13 @@ export const searchStore = createSlice({
     setSearchInput(state, action) {
       state.searchInput = action.payload;
     },
+
     resetState(state, action) {
       state.searchInput = "";
     },
+
     forwardUtils(state, action) {},
+
     setMustperformSearch(state, action) {
       state.mustPerformSearch = action.payload;
     },

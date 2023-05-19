@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-
 import Navigation from "@/components/Layout/Navigation/Navigation";
-import PageTitle from "@/components/ArticleResults/PageTitle";
 import ArticleCardResults from "@/components/ArticleResults/ArticleCardResults";
 import SearchPanel from "@/components/SearchPage/SearchPanel";
 import {
@@ -44,8 +42,8 @@ const index = () => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const articlesRef = collection(db, "articles");
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (mustPerformSearch) {
       setCurrentQuery(
@@ -84,7 +82,8 @@ const index = () => {
       setNoMoreResults(true);
     }
   }, [lastFetchedElm]);
-  const pulaa = () => {
+
+  const getMoreResults = () => {
     try {
       if (lastFetchedElm === undefined) {
         throw new Error();
@@ -105,6 +104,7 @@ const index = () => {
       setNoMoreResults(true);
     }
   };
+
   return (
     <>
       <SEOHeader
@@ -120,7 +120,7 @@ const index = () => {
         <SearchPanel />
         <ArticleCardResults
           articles={articles}
-          handleMoreResults={pulaa}
+          handleMoreResults={getMoreResults}
           noMoreResults={noMoreResults}
         />
       </PageWrapper>

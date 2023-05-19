@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { newArticleActions } from "@/store/new-article";
 import styles from "./MetaData.module.scss";
 import { Calendar } from "primereact/calendar";
 import { Chips } from "primereact/chips";
-import { dateObjToStr, dateObjToStrAdmin } from "@/utils/helperFn";
+import { dateObjToStrAdmin } from "@/utils/helperFn";
 export default function MetaData() {
   const dispatch = useDispatch();
   const articleLabels = [

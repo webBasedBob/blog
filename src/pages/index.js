@@ -19,7 +19,6 @@ export default function Home({ ourPicksArticles, trendingArticles }) {
   const shouldLoadVideo = useInView(lazyLoadVideoHelper, { once: true });
   return (
     <>
-      {" "}
       <SEOHeader
         title={SEO.title}
         description={SEO.description}

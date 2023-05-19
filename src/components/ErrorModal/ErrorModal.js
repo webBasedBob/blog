@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styles from "./ErrorModal.module.scss";
 import { errorActions } from "@/store/error";
 const ErrorModal = ({ errorMessage }) => {

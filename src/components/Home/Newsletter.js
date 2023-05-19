@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Newsletter.module.scss";
 import CTAButton from "../UI/CTAButton";
 import { InputText } from "primereact/inputtext";
-import { useInView } from "framer-motion";
-// import { InputText } from "primereact/inputtext";
+
 const Newsletter = ({ shouldLoadVideo }) => {
   const [email, setEmail] = useState("");
   const handleSubmit = (e) => {

@@ -3,15 +3,6 @@ import styles from "./HeroCarousel.module.scss";
 import Carousel from "react-bootstrap/Carousel";
 import { motion } from "framer-motion";
 
-const CarouselItem = React.forwardRef(({ title, text }, ref) => {
-  return (
-    <Carousel.Item ref={ref} className={styles.carouselItem}>
-      <div className={styles.cariuselText}>{text}</div>
-      <h2 className={styles.carouselTitle}>{title}</h2>
-    </Carousel.Item>
-  );
-});
-
 const HeroCarousel = () => {
   const [index, setIndex] = useState(0);
 

@@ -1,10 +1,4 @@
-import {
-  createSlice,
-  createReducer,
-  configureStore,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
 import { newArticleStore } from "./new-article";
 import { errorStore } from "./error";
 import { searchStore } from "./search";

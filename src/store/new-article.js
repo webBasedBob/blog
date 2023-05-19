@@ -1,14 +1,4 @@
-import {
-  createSlice,
-  createReducer,
-  configureStore,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
-import ArticleTitleInput from "../components/Admin/ArticleBuilder/TitleInput";
-import ArticleMainImageInput from "../components/Admin/ArticleBuilder/ImageUpload";
-import TextSection from "../components/Admin/ArticleBuilder/TextSection";
-import { images } from "../../next.config";
-
+import { createSlice } from "@reduxjs/toolkit";
 const createId = (sectionName, index) => {
   return sectionName + "index-" + index;
 };
@@ -46,6 +36,7 @@ export const newArticleStore = createSlice({
 
       state.sections.push(sectionItem);
     },
+
     updateData(state, action) {
       const {
         payload: { componentName, dataToUpdate, id, newData },
@@ -55,6 +46,7 @@ export const newArticleStore = createSlice({
       }).data;
       targetSection[dataToUpdate] = newData;
     },
+
     updateImageData(state, action) {
       const {
         payload: { componentName, dataToUpdate, id, newData },
@@ -79,8 +71,11 @@ export const newArticleStore = createSlice({
     addMetaData(state, action) {
       state.metaData = { ...state.metaData, ...action.payload };
     },
+
     addImage(state, action) {},
+
     addGallery(state, action) {},
+
     addTextSection(state, action) {},
   },
 });

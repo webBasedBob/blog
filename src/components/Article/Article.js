@@ -1,17 +1,5 @@
-import Intro from "../UI/Intro";
-import Image from "next/image";
-import heroImg from "../../assets/hero.jpeg";
 import ArticleImage from "./ArticleImage";
-import Introduction from "./Introduction";
-import TextSection from "./TextSection";
 import Container from "react-bootstrap/Container";
-import {
-  getFirestoreArticles,
-  getFirestoreDoc,
-  getFirestoreRelatedArticles,
-  getLiveDatabase,
-  getArticle,
-} from "@/utils/firebaseFn";
 import { useEffect, useState } from "react";
 import Title from "./Title";
 import styles from "./Article.module.scss";

@@ -22,6 +22,7 @@ export const animationStore = createSlice({
     setPresentState(state, action) {
       state.presentState = action.payload;
     },
+
     setNextState(state, action) {
       state.nextState = action.payload;
     },

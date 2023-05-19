@@ -1,12 +1,7 @@
 import React from "react";
-import styles from "./ShareIcon.module.scss";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import {
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-} from "react-share";
+import {} from "react-share";
 const ShareIcon = ({ shareBtn, text }) => {
   const renderTooltip = (props) => (
     <Tooltip id={`tooltip-${text}`} {...props}>

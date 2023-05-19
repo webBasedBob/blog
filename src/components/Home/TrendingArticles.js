@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./TrendingArticles.module.scss";
 import Carousel from "react-bootstrap/Carousel";
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Link from "next/link";
 
 const TrendingArticles = React.forwardRef(({ articles }, ref) => {

@@ -15,27 +15,28 @@ const Animation = () => {
   const placeholderRef = useRef();
   const isPlaceholderInView = useInView(placeholderRef);
   const [animationEnded, setAnimationEnded] = useState(true);
+  const [isSSR, setIsSSR] = useState(true);
+
+  const rectangleRef = useRef();
+  const sphereRef = useRef();
+
+  let viewportWidth;
+
   useEffect(() => {
+    setIsSSR(false);
     if (animationEnded && isPlaceholderInView) {
       dispatch(animationActions.setPresentState(nextState));
     }
   }, [animationEnded, nextState]);
-  const rectangleRef = useRef();
-  const sphereRef = useRef();
-  let viewportWidth;
+
   if (typeof window !== "undefined") {
     viewportWidth = window.innerWidth;
   }
-  const [isSSR, setIsSSR] = useState(true);
-  useEffect(() => {
-    setIsSSR(false);
-  }, []);
   return (
     <>
       <div
         style={{
           opacity: 0,
-          backgroundColor: "red",
           height: sphereRef.current?.scrollHeight
             ? sphereRef.current?.scrollHeight
             : rectangleRef.current?.scrollHeight + 20,
