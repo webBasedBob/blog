@@ -1,3 +1,8 @@
 .absolutePos {
   position: absolute;
 }
+.rectangleWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

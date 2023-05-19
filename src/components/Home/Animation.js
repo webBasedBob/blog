@@ -78,7 +78,7 @@ const Animation = () => {
               (presentState.widthToFill - sphereRef.current?.scrollHeight) / 2,
             opacity: presentState.Y ? 1 : 0,
           }}
-          transition={{ type: "spring", duration: 1, bounce: 0.2 }}
+          transition={{ type: "spring", duration: 1, bounce: 0.3 }}
         >
           <FollowingSphere ref={sphereRef} text={presentState.text} />
         </motion.div>
@@ -95,19 +95,17 @@ const Animation = () => {
             dispatch(animationActions.setPresentState(nextState));
           }}
           animate={{
-            y:
-              presentState.Y +
-              presentState.carouselHeight / 2 +
-              (presentState.carouselHeight -
-                rectangleRef.current?.scrollHeight) /
-                2 -
-              rectangleRef.current?.scrollHeight / 2,
-
+            y: presentState.Y + presentState.carouselHeight / 6.5,
             opacity: presentState.Y ? 1 : 0,
           }}
-          transition={{ type: "spring", duration: 1, bounce: 0.2 }}
+          transition={{ type: "spring", duration: 1, bounce: 0.3 }}
         >
-          <FollowingRectangle ref={rectangleRef} text={presentState.text} />
+          <div
+            className={styles.rectangleWrapper}
+            style={{ height: nextState.carouselHeight }}
+          >
+            <FollowingRectangle ref={rectangleRef} text={presentState.text} />
+          </div>
         </motion.div>
       )}
     </>
