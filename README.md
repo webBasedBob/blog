@@ -33,7 +33,7 @@ Individual features worth mentioning:
  1. Search functionality
   - Keyword search that searches in the Firestore No-SQL database
   - It takes the lexical search approach (not the [semantic](https://en.wikipedia.org/wiki/Semantic_search) one - it's not Google)
-  - results are paginated to avoid unnecessary articles fetching (the next batch of results are fetched when "load more" is pressed)
+  - Results are paginated to avoid unnecessary articles fetching (the next batch of results are fetched when "load more" is pressed)
   - It creates no-sql queryes on the client side for the Firestore api that is linked to the database
   
 ![image](https://github.com/webBasedBob/blog/assets/95532233/a7e0fdd1-bde7-42eb-8c2e-b4ed08476a24)
@@ -53,8 +53,10 @@ Individual features worth mentioning:
 - the data in the input fields are sent to the database and retrieved when the article is built for the user to access and read
 
 ![image](https://github.com/webBasedBob/blog/assets/95532233/5937b9aa-4367-4c2a-b18f-23f4ce4fd2b5)
-![image](https://github.com/webBasedBob/blog/assets/95532233/e61129a3-c4b2-4fe3-86a8-bbe67eb43b11)
+printsreen 1: article builder with no sections added
 
+![image](https://github.com/webBasedBob/blog/assets/95532233/e61129a3-c4b2-4fe3-86a8-bbe67eb43b11)
+printsreen 1: article builder with sections added
 
 Project's pages walkthrough:
 
