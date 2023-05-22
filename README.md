@@ -1,38 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJS Blog
 
-## Getting Started
+Live version:https://blog-test-45680.web.app/
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Table of contents
+- [Introduction](#introduction)
+- [Tech stack](#tech-stack)
+- [Project walk-through](#walk-through)
+- [Setup/Launch](#setup)
+- [Status](#status)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Introduction
+A blog made with NextJS, which uses the SSG (Static Site Generation) capabilities of the framework. It includes an 
+admin console built from scratch that allows the admin to create blog posts. The blog has an article search feature that 
+searches in the No-SQL Firestore database and returns paginated results. The entire website has SEO in place, with focus on 
+the blog postings, which are also enriched google results.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+# Tech Stack
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- NextJS
+- React
+- Redux
+- SASS
+- Bootstrap + React Bootstrap
+- PrimeReact (UI components library)
+- Framer Motion
+- Firebase
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+# Walk Through
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Individual features worth mentioning:
+ 1. Search functionality
+  - Keyword search that searches in the Firestore No-SQL database
+  - It takes the lexical search approach (not the [semantic](https://en.wikipedia.org/wiki/Semantic_search) one - it's not Google)
+  - results are paginated to avoid unnecessary articles fetching (the next batch of results are fetched when "load more" is pressed)
+  - It creates no-sql queryes on the client side for the Firestore api that is linked to the database
+  
+![image](https://github.com/webBasedBob/blog/assets/95532233/a7e0fdd1-bde7-42eb-8c2e-b4ed08476a24)
 
-## Learn More
+2. The blog posts are valid [Google Rich Results](https://developers.google.com/search/docs/appearance/structured-data/search-gallery)
+- This result is achieved by following Google's guide using [structured data](https://developers.google.com/search/docs/appearance/structured-data/search-gallery)
 
-To learn more about Next.js, take a look at the following resources:
+![image](https://github.com/webBasedBob/blog/assets/95532233/57dc892d-c2e1-4ffc-952c-07f24d695c8d)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Social media sharing functionality
+- Used Open [Graph protocol](https://ogp.me/) to achieve the article preview when shared on social media
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![image](https://github.com/webBasedBob/blog/assets/95532233/7717d70d-f3a1-404e-b5eb-adcdd11791a2)
 
-## Deploy on Vercel
+4. Admin Console - article builder
+- the admin can build articles here by using the article sections in the toolbar dropdown as building blocks
+- the data in the input fields are sent to the database and retrieved when the article is built for the user to access and read
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![image](https://github.com/webBasedBob/blog/assets/95532233/5937b9aa-4367-4c2a-b18f-23f4ce4fd2b5)
+![image](https://github.com/webBasedBob/blog/assets/95532233/e61129a3-c4b2-4fe3-86a8-bbe67eb43b11)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Project's pages walkthrough:
+
+#### [Home Page](https://blog-test-45680.web.app/)
+
+The home page includes a hero section, a few "Popular Posts" sections (with carousels made of article cards, and a Newsletter sign up section.
+![image](https://github.com/webBasedBob/blog/assets/95532233/d8083b19-9fb0-49ce-9bbb-f8e00ef5db25)
+
+  
+#### [Article Page]([https://react-course-proje.web.app/food](http://localhost:3000/article/how-to-prepare-for-a-job-interview-part-2/))
+
+ The actual article that the final user interacts with
+  
+![image](https://github.com/webBasedBob/blog/assets/95532233/f0eefa1d-0b1a-4264-ba2c-71e54d461281)
+  
+![image](https://github.com/webBasedBob/blog/assets/95532233/48f2832f-85c3-4b32-aadc-b5e6dd835632)
+
+
+# Setup
+
+To run the the app on your machine and play around, just clone the repo and run npm install command in your terminal, then run npm run dev command to start a development server - and you're done.
+
+# Status
+
+The project is under active development.
+
